@@ -1,0 +1,117 @@
+/* Estilo General */
+body {
+    background-color: #f4f6f9; /* Fondo blanco grisaceo */
+    color: #333333; /* Texto oscuro */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Login Wrapper */
+.login-wrapper {
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 700px; /* Ancho máximo ajustado para ambas vistas */
+    margin: auto; /* Centra el contenedor en la página */
+}
+
+/* Marca y Título */
+.brand-title {
+    font-size: 36px;
+    color: #00b5ad; /* Turquesa */
+    margin-bottom: 20px;
+    text-align: center; /* Alinea el título en el centro */
+}
+
+/* Subtítulo (Registro) */
+h2.h5 {
+    font-size: 20px; /* Ajuste del tamaño de la fuente */
+    color: #6c757d; /* Gris para el subtítulo */
+    margin-bottom: 20px;
+    text-align: center; /* Alinea el subtítulo */
+}
+
+/* Alerta de Error */
+.alert {
+    background-color: #e0f7fa; /* Fondo azul claro */
+    color: #00796b; /* Texto oscuro */
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center; /* Alinea el texto de la alerta */
+}
+
+/* Estilo del formulario */
+.formulario-login {
+    width: 100%;
+}
+
+.form-label {
+    color: #00b5ad; /* Color turquesa */
+    font-weight: bold;
+}
+
+.form-control {
+    background-color: #f7f7f7; /* Fondo gris claro */
+    color: #333333;
+    border: 1px solid #00b5ad; /* Borde turquesa */
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: #009c94; /* Azul más oscuro en el enfoque */
+    box-shadow: 0 0 5px rgba(0, 185, 173, 0.5);
+}
+
+.login-btn {
+    background-color: #00b5ad; /* Fondo turquesa */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #009c94; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Enlaces de registro */
+.register-text {
+    color: #333333;
+    font-size: 14px;
+    margin-top: 10px; /* Añadido para asegurarse que los textos estén alineados */
+}
+
+.register-text a {
+    color: #00b5ad; /* Turquesa */
+    text-decoration: none;
+}
+
+.register-text a:hover {
+    text-decoration: underline;
+}
+
+/* Pie de Página */
+footer {
+    background-color: #00b5ad; /* Fondo turquesa */
+    padding: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
