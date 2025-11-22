@@ -12,7 +12,19 @@
 
     <h1> Login </h1>
 
-    <a href="{{ route('register') }}">Register</a>
+    <form method="POST" action="{{ route('loginAttempt') }}">
+        @csrf
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+
+        <a href="{{ route('indexM') }}">Register</a>
 
 </body>
 
