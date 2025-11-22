@@ -14,6 +14,7 @@
     <h1>Main</h1>
 
     <a href="{{ route('registerUser') }}">Register</a>
+    <a href="{{ route('loginRedirect') }}">Log In</a>
 
 </body>
 
