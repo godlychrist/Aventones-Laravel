@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -17,10 +16,22 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    public $timestamps    = false; // ← Agregar esto
+    protected $primaryKey = 'cedula';
+
     protected $fillable = [
+        'cedula',
         'name',
+        'lastname',
+        'birthDate',
         'email',
+        'phoneNum',
         'password',
+        'image',
+        'state',
+        'userType',
+        'token',
+        'expiration_token',
     ];
 
     /**
@@ -42,7 +53,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 }
