@@ -25,7 +25,8 @@
                 <a href="{{ route('rides') }}">Rides</a>
 
                 <a href="{{ url('/vehicles') }}">Vehículos</a>
-                <a href="{{ url('/bookings') }}">Reservas</a>
+                <a href="{{ route('mybookings') }}">Reservas</a>
+
             </nav>
 
 
@@ -123,12 +124,13 @@
 
     <footer class="footer text-center mt-4">
     <nav class="footer-nav mb-2">
-        <a href="#">Panel</a> |
+        <a href="#"class="fw-bold">Panel</a> |
         <a href="{{ url('/rides') }}" class="fw-bold">Rides</a> |
-        <a href="#">Vehículos</a> |
-        <a href="#">Reservas</a> |
-        <a href="{{ route('login') }}">Login</a> |
-        <a href="{{ url('/registration_driver') }}">Registro</a>
+        <a href="#"class="fw-bold">Vehículos</a> |
+        <a href="{{ route('mybookings') }}"class="fw-bold">Reservas</a> |
+        <a href="{{ route('login') }}"class="fw-bold">Login</a> |
+        <a href="{{ url('/registration_driver') }}"class="fw-bold">Registro Conductor</a> |
+        <a href="{{ url('/registration_passenger') }}"class="fw-bold">Registro Pasajero</a> 
     </nav>
     <p class="footer-copy">© Aventones.com</p>
 </footer>
