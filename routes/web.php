@@ -41,3 +41,6 @@ Route::get('/vehicles/create', function () {
     return view('vehicle_create'); 
 })->name('vehicle.create');
 
+Route::get('/mybookings', function () {
+    return view('mybookings');
+})->name('mybookings');
