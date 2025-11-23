@@ -33,6 +33,7 @@ Route::get('/rides', function () {
     return view('ride');   // <-- SIN la “s”
 })->name('rides');
 
+
 Route::get('/vehicles', function () {
     return view('vehicles'); // resources/views/vehicles.blade.php
 })->name('vehicles');
