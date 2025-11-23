@@ -35,6 +35,7 @@ header .nav-bar {
     gap: 20px;
 }
 
+/* ===== BOTONES DEL HEADER (con animación PRO) ===== */
 header .nav-bar a {
     color: white;
     padding: 10px 20px;
@@ -42,12 +43,27 @@ header .nav-bar a {
     border-radius: 10px;
     font-weight: bold;
     text-decoration: none;
-    transition: 0.3s ease;
+
+    display: inline-block; /* Necesario para scale */
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-header .nav-bar a:hover {
-    background: rgba(255,255,255,0.2);
-    color: #00b5ad;
+@media (hover: hover) and (pointer: fine) {
+    header .nav-bar a:hover {
+        background: rgba(255,255,255,0.2);
+        color: #00b5ad;
+
+        transform: translateY(-2px) scale(1.15);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+    }
+}
+
+header .nav-bar a:active {
+    transform: scale(0.95);
 }
 
 header .nav-bar a.active {
@@ -66,44 +82,79 @@ header .nav-bar a.active {
     margin: 15px 0 25px;
 }
 
-/* ===== BOTONES ===== */
+/* ===== BOTONES GENERALES ===== */
+.btn,
+.btn-outline-secondary,
+.btn-new-vehicle {
+    display: inline-block;
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* ===== BOTÓN NORMAL ===== */
 .btn {
     background: #00b5ad;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 10px 20px;
+    border: none;
 }
 
-.btn:hover {
-    background: #009c94;
+@media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+        background: #009c94;
+        transform: translateY(-1px) scale(1.10);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
 }
 
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* ===== BOTÓN OUTLINE ===== */
 .btn-outline-secondary {
-    background: #fff;
+    background: white;
     border: 2px solid #00b5ad;
     color: #00b5ad;
 }
 
-.btn-outline-secondary:hover {
-    background: #00b5ad;
-    color: white;
+@media (hover: hover) and (pointer: fine) {
+    .btn-outline-secondary:hover {
+        background: #00b5ad;
+        color: white;
+        transform: translateY(-1px) scale(1.10);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
 }
 
-/* Nuevo vehículo */
+.btn-outline-secondary:active {
+    transform: scale(0.95);
+}
+
+/* ===== BOTÓN NUEVO VEHÍCULO (Premium style) ===== */
 .btn-new-vehicle {
     background: #00b5ad !important;
     border-color: #00b5ad !important;
     color: white !important;
-    border-radius: 8px;
-    padding: 10px 24px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    border-radius: 10px;
+    padding: 12px 26px;
     font-weight: 600;
 }
 
-.btn-new-vehicle:hover {
-    background: #009c94 !important;
+@media (hover: hover) and (pointer: fine) {
+    .btn-new-vehicle:hover {
+        background: #009c94 !important;
+        transform: translateY(-2px) scale(1.12);
+        box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+    }
+}
+
+.btn-new-vehicle:active {
+    transform: scale(0.94);
 }
 
 /* ===== TABLA ===== */
@@ -124,9 +175,14 @@ footer {
     margin-top: 50px;
     text-align: center;
 }
+
 footer a {
     color: white;
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
 footer a:hover {
-    text-decoration: underline;
+    opacity: 0.85;
+    transform: scale(1.12);
 }
