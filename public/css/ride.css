@@ -1,4 +1,4 @@
-/* ===== Ajuste para pegar footer abajo ===== */
+
 html, body {
     height: 100%;
 }
@@ -13,7 +13,9 @@ main {
     flex: 1;
 }
 
-/* ===== GENERAL ===== */
+/* ============================
+   GENERAL
+============================ */
 body {
     background-color: #fff;
     color: #333;
@@ -21,7 +23,9 @@ body {
     margin: 0;
 }
 
-/* ===== HEADER ===== */
+/* ============================
+   HEADER
+============================ */
 header {
     background-color: #00b5ad;
     padding: 20px;
@@ -35,6 +39,7 @@ header .nav-bar {
     gap: 20px;
 }
 
+/* --- BOTONES DEL HEADER (CON SCALE PRO) --- */
 header .nav-bar a {
     color: white;
     padding: 10px 20px;
@@ -42,12 +47,27 @@ header .nav-bar a {
     border-radius: 10px;
     font-weight: bold;
     text-decoration: none;
-    transition: 0.3s ease;
+
+    display: inline-block;
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-header .nav-bar a:hover {
-    background: rgba(255,255,255,0.2);
-    color: #00b5ad;
+@media (hover: hover) and (pointer: fine) {
+    header .nav-bar a:hover {
+        background: rgba(255,255,255,0.2);
+        color: #00b5ad;
+        transform: translateY(-2px) scale(1.15);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+}
+
+header .nav-bar a:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
 header .nav-bar a.active {
@@ -55,7 +75,9 @@ header .nav-bar a.active {
     color: #00b5ad;
 }
 
-/* ===== TITULO ===== */
+/* ============================
+   TITULOS
+============================ */
 .title {
     font-weight: bold;
     color: #333;
@@ -66,48 +88,98 @@ header .nav-bar a.active {
     margin: 15px 0 25px;
 }
 
-/* ===== BOTONES GENERALES ===== */
+/* ============================
+   BOTONES GENERALES (PRO)
+============================ */
 .btn {
     background: #00b5ad;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 10px 20px;
     border: none;
+    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
-.btn:hover {
-    background: #009c94;
+@media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+        background: #009c94;
+        transform: translateY(-1px) scale(1.07);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
 }
 
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* ---- OUTLINE ---- */
 .btn-outline-secondary {
     background: #fff;
     border: 2px solid #00b5ad;
     color: #00b5ad;
+    border-radius: 8px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease;
 }
 
-.btn-outline-secondary:hover {
-    background: #00b5ad;
-    color: white;
+@media (hover: hover) and (pointer: fine) {
+    .btn-outline-secondary:hover {
+        background: #00b5ad;
+        color: white;
+        transform: translateY(-1px) scale(1.07);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
 }
 
-/* ===== BOTÓN "NUEVO RIDE" ===== */
+.btn-outline-secondary:active {
+    transform: scale(0.96);
+}
+
+/* ============================
+   BOTÓN NUEVO RIDE (PREMIUM)
+============================ */
 .btn-new-ride {
     background: #00b5ad !important;
     border-color: #00b5ad !important;
     color: white !important;
-    border-radius: 8px;
-    padding: 10px 24px;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-weight: 600;
+
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-weight: 600;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease;
 }
 
-.btn-new-ride:hover {
-    background: #009c94 !important;
+@media (hover: hover) and (pointer: fine) {
+    .btn-new-ride:hover {
+        background: #009c94 !important;
+        transform: translateY(-2px) scale(1.12);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    }
 }
 
-/* ===== TABLA ===== */
+.btn-new-ride:active {
+    transform: scale(0.95);
+}
+
+/* ============================
+   TABLA
+============================ */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -125,7 +197,9 @@ table td {
     padding: 12px;
 }
 
-/* ===== FOOTER ===== */
+/* ============================
+   FOOTER
+============================ */
 footer {
     background: #00b5ad;
     color: white;
@@ -137,8 +211,15 @@ footer {
 footer a {
     color: white;
     text-decoration: none;
+
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 footer a:hover {
     text-decoration: underline;
+    opacity: 0.85;
+    transform: scale(1.1);
 }
+
+
