@@ -10,7 +10,7 @@ body {
 }
 
 /* ============================
-   HEADER (MISMO QUE TUS OTRAS PÁGINAS)
+   HEADER
 ============================ */
 header {
     background-color: #00b5ad;
@@ -34,12 +34,18 @@ header .nav-bar a {
     padding: 10px 20px;
     border-radius: 10px;
     border: 2px solid white;
-    transition: 0.3s ease;
+
+    /* 👇 NECESARIO PARA EL SCALE */
+    display: inline-block;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease, color 0.2s ease;
 }
 
 header .nav-bar a:hover {
     background-color: rgba(255,255,255,0.2);
     color: #00b5ad;
+
+    /* 👇 CRECE */
+    transform: scale(1.2);
 }
 
 /* Activo */
@@ -88,10 +94,10 @@ table td {
 }
 
 /* ============================
-   BOTÓN NUEVO RIDE (VERDE)
+   BOTÓN NUEVO RIDE
 ============================ */
 .btn-new-ride {
-    background-color: #00c853 !important; /* Verde */
+    background-color: #00c853 !important;
     color: white !important;
     font-weight: bold;
     border-radius: 8px;
@@ -122,4 +128,16 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+/* ============================
+   EFECTO HOVER-GROW GENERAL
+============================ */
+.hover-grow {
+    display: inline-block !important;
+    transition: transform 0.2s ease-in-out !important;
+}
+
+.hover-grow:hover {
+    transform: scale(1.3) !important;
 }
