@@ -24,11 +24,12 @@ class UserController extends Controller
     public function create(): View
     {
         $user = new User();
-        return view('register');
+        return view('registration_passenger');
     }
 
     public function store(UserRequest $request): RedirectResponse
     {
+    
         $data = $request->validated();
 
         $imagePath = null;
@@ -51,7 +52,7 @@ class UserController extends Controller
             'expiration_token' => now()->addHours(1),
         ]);
 
-        return redirect()->route('register')
+        return redirect()->route('registration_passenger')
             ->with('success', 'Usuario registrado correctamente.');
 
     }
