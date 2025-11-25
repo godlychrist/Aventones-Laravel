@@ -16,7 +16,7 @@
       <h1 class="brand-title fw-bold text-primary m-0">AVENTONES</h1>
 
       <!-- Formulario de Login -->
-      <form action="{{ route('login') }}" method="POST" id="loginForm" class="formulario-login text-start w-100 mt-3">
+      <form action="{{ route('loginAttempt') }}" method="POST" id="loginForm" class="formulario-login text-start w-100 mt-3">
         @csrf <!-- Protección CSRF de Laravel -->
 
         <!-- Alerta dinámica controlada por JS -->
