@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function auth(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'email'    => 'required|email',
+            'cedula'    => 'required|numeric',
             'password' => 'required',
         ]);
 
@@ -22,8 +22,8 @@ class LoginController extends Controller
             if ($user->state !== 'active') {
                 Auth::logout();
                 return back()->withErrors([
-                    'email' => 'Your account is not active.',
-                ])->onlyInput('email');
+                    'cedula' => 'Your account is not active.',
+                ])->onlyInput('cedula');
             }
 
             $request->session()->regenerate();
@@ -31,7 +31,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+            'cedula' => 'The provided credentials do not match our records.',
+        ])->onlyInput('cedula');
     }
 }
