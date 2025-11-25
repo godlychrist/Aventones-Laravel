@@ -2,68 +2,80 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aventones | Registro</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aventones | Registro Conductor</title>
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Tu CSS (mismo que el del login) -->
-  <link rel="stylesheet" href="{{ asset('css/logIn.css') }}"/>
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="{{ asset('css/logIn.css') }}" />
 </head>
 
 <body>
-  <main class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
-    <div class="login-wrapper shadow border border-primary rounded p-4 p-md-5 text-center d-flex flex-column align-items-center gap-3" style="max-width: 700px; width:100%;">
-      <h1 class="brand-title fw-bold text-primary m-0">AVENTONES</h1>
-      <h2 class="h5 text-secondary m-0">Registro Conductores</h2>
 
-      <!-- FORMULARIO -->
-      <form action="/functions/insertDriver.php" method="post" enctype="multipart/form-data" class="formulario-login text-start w-100 mt-3" style="max-width: 560px;">
-        <!-- Nombres / Apellidos -->
-        <div class="row g-3">
-          <div class="col-12 col-md-6">
-            <label for="name" class="form-label fw-bold text-dark">Nombre</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Juan" required>
-          </div>
-          <div class="col-12 col-md-6">
-            <label for="lastName" class="form-label fw-bold text-dark">Apellidos</label>
-            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Pérez Solano" required>
-          </div>
-        </div>
+<main class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
 
-        <!-- Cédula / Fecha Nacimiento -->
-        <div class="row g-3 mt-1">
-          <div class="col-12 col-md-6">
-            <label for="cedula" class="form-label fw-bold text-dark">Cédula</label>
-            <input type="text" id="cedula" name="cedula" class="form-control" placeholder="1-2345-6789" required>
-          </div>
-          <div class="col-12 col-md-6">
-            <label for="fecha_nac" class="form-label fw-bold text-dark">Fecha de Nacimiento</label>
-            <input type="date" id="fecha_nac" name="fecha_nac" class="form-control" required>
-          </div>
-        </div>
+    <div class="login-wrapper shadow border border-primary rounded p-4 p-md-5 text-center 
+                d-flex flex-column align-items-center gap-3"
+         style="max-width: 700px; width:100%;">
 
-        <!-- Correo / Teléfono -->
-        <div class="row g-3 mt-1">
-          <div class="col-12 col-md-6">
-            <label for="correo" class="form-label fw-bold text-dark">Correo</label>
-            <input type="email" id="correo" name="correo" class="form-control" placeholder="tu@correo.com" required>
-          </div>
-          <div class="col-12 col-md-6">
-            <label for="telefono" class="form-label fw-bold text-dark">Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="8888-8888" required>
-          </div>
-        </div>
+        <h1 class="brand-title fw-bold text-primary m-0">AVENTONES</h1>
+        <h2 class="h5 text-secondary m-0">Registro Conductores</h2>
 
-        <!-- Foto -->
-        <div class="mt-3">
-          <label for="foto" class="form-label fw-bold text-dark">Fotografía Personal</label>
-          <input type="file" id="foto" name="foto" class="form-control" accept="image/*" required>
-        </div>
+        {{-- ===== FORMULARIO ===== --}}
+        <form action="{{ route('saveDriver') }}" method="POST" enctype="multipart/form-data"
+              class="formulario-login text-start w-100 mt-3" style="max-width: 560px;">
+            @csrf
 
-        <!-- Password / Confirmación -->
+            {{-- Nombre / Apellidos --}}
+            <div class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label fw-bold text-dark">Nombre</label>
+                    <input type="text" name="name" class="form-control" placeholder="Juan" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label fw-bold text-dark">Apellidos</label>
+                    <input type="text" name="lastname" class="form-control" placeholder="Pérez Solano" required>
+                </div>
+            </div>
+
+            {{-- Cédula / Fecha Nacimiento --}}
+            <div class="row g-3 mt-1">
+                <div class="col-12 col-md-6">
+                    <label class="form-label fw-bold text-dark">Cédula</label>
+                    <input type="text" name="cedula" class="form-control" placeholder="1-2345-6789" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label fw-bold text-dark">Fecha de Nacimiento</label>
+                    <input type="date" name="birthDate" class="form-control" required>
+                </div>
+            </div>
+
+            {{-- Email / Teléfono --}}
+            <div class="row g-3 mt-1">
+                <div class="col-12 col-md-6">
+                    <label class="form-label fw-bold text-dark">Correo</label>
+                    <input type="email" name="email" class="form-control" placeholder="tu@correo.com" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label fw-bold text-dark">Teléfono</label>
+                    <input type="tel" name="phoneNum" class="form-control" placeholder="8888-8888" required>
+                </div>
+            </div>
+
+            {{-- Foto --}}
+            <div class="mt-3">
+                <label class="form-label fw-bold text-dark">Fotografía Personal</label>
+                <input type="file" name="image" class="form-control" accept="image/*">
+            </div>
+
+            {{-- Password --}}
+            <!-- Password / Confirmación -->
         <div class="row g-3 mt-1">
           <div class="col-12 col-md-6">
             <label for="password" class="form-label fw-bold text-dark">Password</label>
@@ -74,28 +86,29 @@
             <input type="password" id="password_confirm" name="password_confirm" class="form-control" placeholder="********" required>
           </div>
         </div>
+            {{-- Botón --}}
+            <div class="d-flex justify-content-center mt-4">
+                <button type="submit" class="login-btn btn btn-primary">Registrar</button>
+            </div>
 
-        <!-- Acciones -->
-        <div class="d-flex justify-content-center mt-4">
-          <button type="submit" class="login-btn btn btn-primary">Register</button>
-        </div>
+            {{-- Link Login --}}
+            <p class="register-text text-center mt-3">
+                ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+            </p>
+        </form>
 
-        <!-- Links auxiliares -->
-        <p class="register-text text-center mt-3">
-          ¿Ya tienes cuenta? <a href="../index.php">Inicia sesión</a>
-        </p>
-      </form>
     </div>
-  </main>
+</main>
 
-  <footer class="footer text-center mt-4">
+<footer class="footer text-center mt-4">
     <nav class="footer-nav mb-2">
-      <a href="/index.php">Rides</a> |
-      <a href="/login.php">Login</a> |
-      <a href="/pages/registration_passenger.php">Registro Pasajero</a> |
-      <a href="/pages/registration_driver.php">Registro Conductor</a>
+        <a href="/login">Login</a> |
+        <a href="/registration_passenger">Registro Pasajero</a> |
+        <a href="/registration_driver">Registro Conductor</a>
     </nav>
     <p class="footer-copy">© Aventones.com</p>
-  </footer>
+</footer>
+
 </body>
+
 </html>
