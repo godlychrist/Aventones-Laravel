@@ -1,62 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<tbody>
+@forelse ($vehicles as $vehicle)
+    <tr>
+        <td>{{ $vehicle->plateNum }}</td>
+        <td>{{ $vehicle->brand }}</td>
+        <td>{{ $vehicle->model }}</td>
+        <td>{{ $vehicle->color }}</td>
+        <td>{{ $vehicle->year }}</td>
+        <td>{{ $vehicle->capacity }}</td>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios</title>
-    <link rel="stylesheet" href="{{ asset('css/showUsers.css') }}">
-</head>
+        <td>
+            @if ($vehicle->image)
+                <img src="{{ asset('storage/' . $vehicle->image) }}"
+                     alt="Vehículo {{ $vehicle->plateNum }}"
+                     style="width: 80px; height: auto; border-radius: 6px;">
+            @else
+                <span class="text-muted">Sin imagen</span>
+            @endif
+        </td>
 
-<body>
+        <td>
+            <a href="{{ route('vehicles.edit', $vehicle->id) }}" class="btn btn-sm btn-primary">
+                Editar
+            </a>
 
-    <h1>Lista de Usuarios</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Imagen</th>
-                <th>Acciones</th> <!-- ⭐ Nueva columna -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-            <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->lastname }}</td>
-                <td>{{ $user->email }}</td>
-                <td>
-                    @if ($user->image)
-                    <img src="{{ asset('storage/' . $user->image) }}" alt="Imagen de {{ $user->name }}">
-                    @endif
-                </td>
-
-                <td class="acciones">
-                    <!-- Botón Editar -->
-                    <a href="{{ route ('editUser', $user->cedula) }}" class="btn-edit">Editar</a>
-
-                    <!-- Botón Eliminar -->
-                    <form action="{{ route ('deleteUser', $user->cedula) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn-delete"
-                            onclick="return confirm('¿Seguro que quieres eliminar este usuario?');">
-                            Eliminar
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    <div class="pagination">
-        {{ $users->links('pagination::simple-default') }}
-    </div>
-
-</body>
-
-</html>
+            <form action="{{ route('vehicles.destroy', $vehicle->id) }}"
+                  method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                        class="btn btn-sm btn-danger"
+                        onclick="return confirm('¿Seguro que quieres eliminar este vehículo?');">
+                    Eliminar
+                </button>
+            </form>
+        </td>
+    </tr>
+@empty
+    <tr>
+        <td colspan="8" class="text-center text-muted py-4">
+            No tienes vehículos registrados todavía.
+        </td>
+    </tr>
+@endforelse
+</tbody>

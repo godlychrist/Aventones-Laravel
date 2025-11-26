@@ -1,0 +1,150 @@
+/* Estilo General */
+body {
+    background-color: #f4f6f9; /* Fondo blanco grisáceo */
+    color: #333333;           /* Texto oscuro */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Card principal del perfil */
+.profile-wrapper {
+    background-color: #ffffff; /* Fondo blanco */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 720px;
+}
+
+/* Título AVENTONES */
+.brand-title {
+    font-size: 36px;
+    color: #00b5ad; /* Turquesa */
+    margin-bottom: 10px;
+}
+
+/* Subtítulo (Mi Perfil) */
+.profile-wrapper h2 {
+    color: #6c757d; /* Gris Bootstrap */
+}
+
+/* Fila del avatar */
+.avatar-row {
+    align-items: center;
+}
+
+/* Avatar redondo */
+.avatar-wrapper {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #00b5ad;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Formulario */
+.formulario-profile {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Labels */
+.form-label {
+    color: #00b5ad; /* Turquesa */
+    font-weight: bold;
+}
+
+/* Inputs */
+.form-control {
+    background-color: #f7f7f7;
+    color: #333333;
+    border: 1px solid #00b5ad;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-control:focus {
+    border-color: #009c94;
+    box-shadow: 0 0 5px rgba(0, 185, 173, 0.4);
+}
+
+/* Botón Guardar */
+.profile-btn {
+    background-color: #00b5ad;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.profile-btn:hover {
+    background-color: #009c94;
+    transform: translateY(-1px);
+}
+
+/* Link "volver al panel" */
+.profile-link {
+    font-size: 14px;
+}
+
+.profile-link a {
+    color: #00b5ad;
+    text-decoration: none;
+}
+
+.profile-link a:hover {
+    text-decoration: underline;
+}
+
+/* Footer igual que el login */
+footer {
+    background-color: #00b5ad; /* Turquesa */
+    padding: 20px;
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Botón "Volver al panel" */
+.btn-return-panel {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #00b5ad;
+    border: 2px solid #00b5ad;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-return-panel:hover {
+    background-color: #00b5ad;
+    color: #ffffff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}

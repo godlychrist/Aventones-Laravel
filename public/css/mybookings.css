@@ -1,0 +1,140 @@
+/* ===== FIX FOOTER ===== */
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* ===== GENERAL ===== */
+body {
+    background-color: #fff;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* ===== HEADER ===== */
+header {
+    background-color: #00b5ad;
+    padding: 20px;
+    border-bottom: 2px solid #009c94;
+    color: white;
+}
+
+header .nav-bar {
+    display: flex;
+    gap: 20px;
+}
+
+/* ===== BOTONES DEL HEADER (animación PRO) ===== */
+header .nav-bar a {
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid white;
+    text-decoration: none;
+
+    display: inline-block;
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    header .nav-bar a:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-2px) scale(1.15);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+    }
+}
+
+header .nav-bar a.active {
+    background: white;
+    color: #00b5ad;
+}
+
+/* ===== TITULO ===== */
+.title {
+    font-weight: bold;
+    color: #333;
+}
+
+.divider {
+    border-top: 2px solid #eee;
+    margin: 15px 0 25px;
+}
+
+/* ===== TABLA ===== */
+table th {
+    background: #00b5ad !important;
+    color: white !important;
+}
+
+table td {
+    background: #f7f7f7;
+}
+
+/* ===== BOTONES GENERALES ===== */
+.btn,
+.btn-outline-secondary,
+.btn-success,
+.btn-danger {
+    display: inline-block;
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+    border-radius: 8px !important;
+}
+
+/* ===== BOTÓN SUAVE ===== */
+@media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+        transform: translateY(-1px) scale(1.08);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.20);
+    }
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* ===== BOTONES DE ESTADO (Aceptar/Rechazar/Cancelar) ===== */
+.btn-success:hover {
+    background-color: #0b9444 !important;
+}
+
+.btn-danger:hover {
+    background-color: #cc0000 !important;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #00b5ad;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer a {
+    color: white;
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+footer a:hover {
+    opacity: 0.85;
+    transform: scale(1.12);
+}

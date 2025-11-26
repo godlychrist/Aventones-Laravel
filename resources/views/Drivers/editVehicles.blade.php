@@ -1,76 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+@php
+    $user = Auth::user();
+@endphp
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <title>Editar Vehículo</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>Edicion de Usuario</h1>
+<body class="bg-light">
 
-    {{-- MOSTRAR ERRORES DE VALIDACIÓN --}}
-    @if ($errors->any())
-    <div style="color: red; border: 1px solid red; padding: 10px; margin-bottom: 20px;">
-        <h3>Errores:</h3>
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+<div class="container py-5">
 
-    {{-- MOSTRAR MENSAJE DE ÉXITO --}}
-    @if (session('success'))
-    <div style="color: green; border: 1px solid green; padding: 10px; margin-bottom: 20px;">
-        {{ session('success') }}
-    </div>
-    @endif
-    <form action="{{ route('updateUser', $user->cedula) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+    <h2 class="text-center mb-4">Editar Vehículo</h2>
 
-        <div>
-            <label>Nombre:</label>
-            <input type="text" name="name" value="{{ $user->name }}" required>
-        </div>
+    <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
 
-        <div>
-            <label>Apellido:</label>
-            <input type="text" name="lastname" value="{{ $user->lastname }}" required>
-        </div>
-
-        <div>
-            <label>Fecha de Nacimiento:</label>
-            <input type="date" name="birthDate" value="{{ $user->birthDate }}" required>
-        </div>
-
-        <div>
-            <label>Email:</label>
-            <input type="email" name="email" value="{{ $user->email }}" required>
-        </div>
-
-        <div>
-            <label>Teléfono:</label>
-            <input type="text" name="phoneNum" value="{{ $user->phoneNum }}" required>
-        </div>
-
-        <label>Imagen:</label>
-        @if ($user->image)
-        <img src="{{ asset('storage/' . $user->image) }}" alt="Imagen actual" width="120"
-            style="display:block; margin-bottom:10px;">
+        {{-- ERRORES --}}
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
 
-        <label for="image">Cambiar Imagen:</label>
-        <input type="file" name="image">
+        <form action="{{ route('vehicles.update', $vehicle->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
+            <input type="hidden" name="user_id" value="{{ $vehicle->user_id }}">
 
-        <button type="submit">Editar</button>
-    </form>
+            <div class="mb-3">
+                <label class="form-label fw-bold">Número de Placa</label>
+                <input type="text" name="plateNum"
+                       class="form-control" value="{{ $vehicle->plateNum }}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Color</label>
+                <input type="text" name="color"
+                       class="form-control" value="{{ $vehicle->color }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Marca</label>
+                <input type="text" name="brand"
+                       class="form-control" value="{{ $vehicle->brand }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Modelo</label>
+                <input type="text" name="model"
+                       class="form-control" value="{{ $vehicle->model }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Año</label>
+                <input type="date" name="year"
+                       class="form-control" value="{{ $vehicle->year }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Capacidad</label>
+                <input type="number" name="capacity" min="1"
+                       class="form-control" value="{{ $vehicle->capacity }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Foto actual</label><br>
+
+                @if ($vehicle->image)
+                    <img src="{{ asset('storage/' . $vehicle->image) }}"
+                         style="width: 120px; height:auto; border-radius:6px;" class="mb-2">
+                @else
+                    <p class="text-muted">Sin imagen registrada</p>
+                @endif
+
+                <input type="file" name="image" class="form-control mt-2">
+                <small class="text-muted">Si subes una nueva imagen, reemplazará la anterior.</small>
+            </div>
+
+            <button class="btn btn-primary w-100">Guardar Cambios</button>
+
+            <a href="{{ route('vehicles') }}" class="btn btn-secondary w-100 mt-3">Cancelar</a>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
-
 </html>
