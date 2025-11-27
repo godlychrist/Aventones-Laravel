@@ -12,6 +12,12 @@ use Illuminate\View\View;
 class UserController extends Controller
 {
 
+    /**
+     * Display a paginated list of users
+     * 
+     * @param Request $request The HTTP request
+     * @return View The users list view
+     */
     public function index(Request $request): View
     {
 
@@ -21,12 +27,23 @@ class UserController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * $users->perPage());
     }
 
+    /**
+     * Show the form for creating a new user
+     * 
+     * @return View The user registration form view
+     */
     public function create(): View
     {
         $user = new User();
-        return view('registration_passenger');
+        return view('Users.registration_passenger');
     }
 
+    /**
+     * Store a newly created user in the database
+     * 
+     * @param UserRequest $request The validated user request
+     * @return RedirectResponse Redirects back to registration with success message
+     */
     public function store(UserRequest $request): RedirectResponse
     {
     
@@ -52,24 +69,43 @@ class UserController extends Controller
             'expiration_token' => now()->addHours(1),
         ]);
 
-        return redirect()->route('registration_passenger')
+        return redirect()->route('register')
             ->with('success', 'Usuario registrado correctamente.');
 
     }
 
+    /**
+     * Display the specified user
+     * 
+     * @param int $id The user ID
+     * @return View The user detail view
+     */
     public function show($id): View
     {
         $user = User::find($id);
-        return view('showUser', compact('user'));
+        return view('Users.profile', compact('user'));
     }
 
+    /**
+     * Show the form for editing the specified user
+     * 
+     * @param string $cedula The user's cedula (ID number)
+     * @return View The user edit form view
+     */
     public function edit($cedula): View
     {
         $user = User::where('cedula', $cedula)->firstOrFail();
-        return view('edit', compact('user'));
+        return view('Users.edit', compact('user'));
 
     }
 
+    /**
+     * Update the specified user in the database
+     * 
+     * @param UserRequest $request The validated user request
+     * @param string $cedula The user's cedula (ID number)
+     * @return RedirectResponse Redirects to users list with success message
+     */
     public function update(UserRequest $request, $cedula): RedirectResponse
     {
 
@@ -87,6 +123,12 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Remove the specified user from the database
+     * 
+     * @param string $cedula The user's cedula (ID number)
+     * @return RedirectResponse Redirects to users list with success message
+     */
     public function destroy($cedula): RedirectResponse
     {
         User::where('cedula', $cedula)->delete();
