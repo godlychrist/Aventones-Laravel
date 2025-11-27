@@ -100,10 +100,6 @@
     </div>
 
     <p class="register-text text-center mt-3">
-        <a href="{{ route('registerDriver') }}">Iniciar Sesión Como Conductor </a>
-    </p>
-
-    <p class="register-text text-center mt-3">
         ¿Ya tienes cuenta? <a href="{{ route('login') }}">Inicia sesión</a>
     </p>
 </form>
@@ -115,10 +111,10 @@
 
   <footer class="footer text-center mt-4">
     <nav class="footer-nav mb-2">
-      <a href="{{ route('/index') }}">Rides</a> |
-      <a href="{{ route('login') }}">Login</a> |
-      <a href="{{ route('register') }}">Registro Pasajero</a> |
-      <a href="{{ route('registerDriver') }}">Registro Conductor</a>
+      <a href="/index.php">Rides</a> |
+      <a href="/login.php">Login</a> |
+      <a href="/pages/registration_passenger.php">Registro Pasajero</a> |
+      <a href="/pages/registration_driver.php">Registro Conductor</a>
     </nav>
     <p class="footer-copy">© Aventones.com</p>
   </footer>

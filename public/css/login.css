@@ -1,11 +1,3 @@
-/* ===================================
-   IMPORT GLOBAL VARIABLES
-   =================================== */
-@import url('variables.css');
-
-/* ===================================
-   CSS RESET & BASE STYLES
-   =================================== */
 * {
     margin: 0;
     padding: 0;
@@ -13,245 +5,174 @@
 }
 
 body {
-    font-family: var(--font-family-base);
-    line-height: var(--line-height-normal);
-    transition: background-color var(--transition-base), color var(--transition-base);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ===================================
-   THEME TOGGLE BUTTON
-   =================================== */
+/* Theme Toggle Button */
 .theme-toggle {
     position: fixed;
-    top: var(--spacing-lg);
-    right: var(--spacing-lg);
+    top: 2rem;
+    right: 2rem;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    background: var(--color-text-primary);
-    border: 2px solid var(--color-text-primary);
+    background: #000;
+    border: 2px solid #000;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000;
-    transition: all var(--transition-base);
-    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .theme-toggle:hover {
-    transform: scale(1.1) rotate(15deg);
-    box-shadow: var(--shadow-lg);
-}
-
-.theme-toggle:active {
-    transform: scale(0.95);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .sun-icon {
-    color: var(--color-bg-primary);
+    color: #fff;
     display: block;
 }
 
 .moon-icon {
-    color: var(--color-bg-primary);
+    color: #fff;
     display: none;
 }
 
-/* ===================================
-   LOGIN CONTAINER
-   =================================== */
+.dark-mode .theme-toggle {
+    background: #fff;
+    border-color: #fff;
+}
+
+.dark-mode .sun-icon {
+    display: none;
+}
+
+.dark-mode .moon-icon {
+    color: #000;
+    display: block;
+}
+
+/* Light Mode (Default) */
 .login-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-bg-secondary);
-    padding: var(--spacing-sm);
-    transition: background-color var(--transition-base);
+    background-color: #f9fafb;
+    padding: 1rem;
+    transition: background-color 0.3s ease;
 }
 
 .login-card {
     width: 100%;
     max-width: 28rem;
-    background: var(--color-bg-primary);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    padding: var(--spacing-lg);
-    transition: all var(--transition-base);
-    animation: fadeInUp 0.5s ease;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    transition: all 0.3s ease;
 }
 
-/* ===================================
-   LOGIN HEADER
-   =================================== */
 .login-header {
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: 2rem;
 }
 
 .login-title {
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-semibold);
-    margin: 0 0 var(--spacing-xs) 0;
-    color: var(--color-text-primary);
-    transition: color var(--transition-base);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #111827;
+    transition: color 0.3s ease;
 }
 
 .login-description {
-    font-size: var(--font-size-sm);
+    font-size: 0.875rem;
     margin: 0;
-    color: var(--color-text-secondary);
-    transition: color var(--transition-base);
+    color: #6b7280;
+    transition: color 0.3s ease;
 }
 
-/* ===================================
-   FORM STYLES
-   =================================== */
 .login-form {
     display: flex;
     flex-direction: column;
 }
 
 .form-group {
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 1.5rem;
 }
 
 .form-label {
     display: block;
-    margin-bottom: var(--spacing-xs);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-text-primary);
-    transition: color var(--transition-base);
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    transition: color 0.3s ease;
 }
 
 .form-input {
     width: 100%;
     padding: 0.625rem 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    font-size: var(--font-size-sm);
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
     font-family: inherit;
-    transition: all var(--transition-base);
-    background: var(--color-bg-primary);
-    color: var(--color-text-primary);
+    transition: all 0.3s ease;
+    background: white;
+    color: #111827;
 }
 
 .form-input:focus {
     outline: none;
-    border-color: var(--color-primary);
+    border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .form-input::placeholder {
-    color: var(--color-text-muted);
+    color: #9ca3af;
 }
 
-/* ===================================
-   FORGOT PASSWORD & REGISTER LINKS
-   =================================== */
 .forgot-password {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 1.5rem;
 }
 
 .forgot-link {
-    font-size: var(--font-size-sm);
-    color: var(--color-primary);
+    font-size: 0.875rem;
+    color: #2563eb;
     text-decoration: none;
-    transition: all var(--transition-base);
-    position: relative;
+    transition: all 0.3s ease;
 }
 
-.forgot-link::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width var(--transition-base);
+.forgot-link:hover {
+    text-decoration: underline;
 }
 
-.forgot-link:hover::after {
-    width: 100%;
-}
-
-.register-link {
-    margin-top: var(--spacing-md);
-    text-align: center;
-    font-size: var(--font-size-sm);
-    color: var(--color-text-secondary);
-}
-
-.register-link a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: all var(--transition-base);
-    position: relative;
-}
-
-.register-link a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width var(--transition-base);
-}
-
-.register-link a:hover::after {
-    width: 100%;
-}
-
-/* ===================================
-   SUBMIT BUTTON
-   =================================== */
 .submit-button {
     width: 100%;
     padding: 0.625rem 1rem;
-    background-color: var(--color-text-primary);
+    background-color: #000;
     color: white;
     border: none;
-    border-radius: var(--radius-sm);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
     font-family: inherit;
-    transition: all var(--transition-base);
-    position: relative;
-    overflow: hidden;
-}
-
-.submit-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.submit-button:hover::before {
-    width: 300px;
-    height: 300px;
+    transition: all 0.3s ease;
 }
 
 .submit-button:hover {
     background-color: #1f2937;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .submit-button:active {
@@ -259,18 +180,7 @@ body {
     transform: translateY(0);
 }
 
-/* ===================================
-   DARK MODE
-   =================================== */
-.dark-mode {
-    --color-text-primary: #f9fafb;
-    --color-text-secondary: #d1d5db;
-    --color-text-muted: #9ca3af;
-    --color-bg-primary: rgba(255, 255, 255, 0.05);
-    --color-bg-secondary: #0a0a0a;
-    --color-border: rgba(255, 255, 255, 0.2);
-}
-
+/* Dark Mode Styles */
 .dark-mode .login-container {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
 }
@@ -287,7 +197,7 @@ body {
 }
 
 .dark-mode .login-description {
-    color: var(--color-text-secondary);
+    color: #d1d5db;
 }
 
 .dark-mode .form-label {
@@ -310,14 +220,8 @@ body {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
-.dark-mode .forgot-link,
-.dark-mode .register-link a {
+.dark-mode .forgot-link {
     color: #ffffff;
-}
-
-.dark-mode .forgot-link::after,
-.dark-mode .register-link a::after {
-    background: #ffffff;
 }
 
 .dark-mode .submit-button {
@@ -336,68 +240,16 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.dark-mode .theme-toggle {
-    background: var(--color-bg-primary);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.dark-mode .sun-icon {
-    display: none;
-}
-
-.dark-mode .moon-icon {
-    color: #ffffff;
-    display: block;
-}
-
-/* ===================================
-   ANIMATIONS
-   =================================== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===================================
-   RESPONSIVE DESIGN
-   =================================== */
+/* Responsive adjustments */
 @media (max-width: 640px) {
     .login-card {
-        padding: var(--spacing-md);
+        padding: 1.5rem;
     }
 
     .theme-toggle {
-        top: var(--spacing-sm);
-        right: var(--spacing-sm);
+        top: 1rem;
+        right: 1rem;
         width: 2.5rem;
         height: 2.5rem;
     }
-}
-
-/* ===================================
-   ACCESSIBILITY
-   =================================== */
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-}
-
-.submit-button:focus-visible,
-.forgot-link:focus-visible,
-.register-link a:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
 }

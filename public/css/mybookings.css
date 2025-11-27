@@ -1,20 +1,5 @@
-/* ===================================
-   IMPORT GLOBAL VARIABLES
-   =================================== */
-@import url('variables.css');
-
-/* ===================================
-   MY BOOKINGS PAGE STYLES
-   =================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
+/* ===== FIX FOOTER ===== */
+html, body {
     height: 100%;
 }
 
@@ -28,118 +13,97 @@ main {
     flex: 1;
 }
 
+/* ===== GENERAL ===== */
 body {
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
-    font-family: var(--font-family-base);
-    line-height: var(--line-height-normal);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    background-color: #fff;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
 }
 
-/* Header */
+/* ===== HEADER ===== */
 header {
-    background-color: var(--color-info);
-    padding: var(--spacing-lg);
-    border-bottom: 2px solid var(--color-info-hover);
+    background-color: #00b5ad;
+    padding: 20px;
+    border-bottom: 2px solid #009c94;
     color: white;
 }
 
 header .nav-bar {
     display: flex;
-    gap: var(--spacing-lg);
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 20px;
 }
 
+/* ===== BOTONES DEL HEADER (animación PRO) ===== */
 header .nav-bar a {
     color: white;
-    padding: 0.75rem var(--spacing-lg);
-    font-weight: var(--font-weight-semibold);
-    border-radius: var(--radius-lg);
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 10px;
     border: 2px solid white;
     text-decoration: none;
+
     display: inline-block;
-    transition: all var(--transition-base);
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
     header .nav-bar a:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: var(--shadow-lg);
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-2px) scale(1.15);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.22);
     }
-}
-
-header .nav-bar a:active {
-    transform: scale(0.95);
 }
 
 header .nav-bar a.active {
     background: white;
-    color: var(--color-info);
+    color: #00b5ad;
 }
 
-/* Title */
+/* ===== TITULO ===== */
 .title {
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-primary);
-    font-size: var(--font-size-2xl);
+    font-weight: bold;
+    color: #333;
 }
 
 .divider {
-    border-top: 2px solid var(--color-border);
-    margin: var(--spacing-md) 0 var(--spacing-lg);
+    border-top: 2px solid #eee;
+    margin: 15px 0 25px;
 }
 
-/* Table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: var(--spacing-md);
-    box-shadow: var(--shadow-sm);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-}
-
+/* ===== TABLA ===== */
 table th {
-    background: var(--color-info) !important;
+    background: #00b5ad !important;
     color: white !important;
-    padding: var(--spacing-md);
-    font-weight: var(--font-weight-semibold);
-    text-align: left;
 }
 
 table td {
-    background: var(--color-bg-secondary);
-    padding: var(--spacing-md);
-    border-bottom: 1px solid var(--color-border);
+    background: #f7f7f7;
 }
 
-table tr:last-child td {
-    border-bottom: none;
-}
-
-/* Buttons */
+/* ===== BOTONES GENERALES ===== */
 .btn,
 .btn-outline-secondary,
 .btn-success,
 .btn-danger {
     display: inline-block;
-    transition: all var(--transition-base);
-    border-radius: var(--radius-md) !important;
-    font-family: inherit;
-    cursor: pointer;
-    padding: 0.625rem 1rem;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    border: none;
+    transition:
+        transform 0.2s ease-in-out,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+    border-radius: 8px !important;
 }
 
+/* ===== BOTÓN SUAVE ===== */
 @media (hover: hover) and (pointer: fine) {
     .btn:hover {
-        transform: translateY(-1px) scale(1.05);
-        box-shadow: var(--shadow-md);
+        transform: translateY(-1px) scale(1.08);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.20);
     }
 }
 
@@ -147,71 +111,30 @@ table tr:last-child td {
     transform: scale(0.95);
 }
 
-.btn-success {
-    background-color: var(--color-success) !important;
-    color: white !important;
-}
-
+/* ===== BOTONES DE ESTADO (Aceptar/Rechazar/Cancelar) ===== */
 .btn-success:hover {
-    background-color: var(--color-success-hover) !important;
-}
-
-.btn-danger {
-    background-color: var(--color-danger) !important;
-    color: white !important;
+    background-color: #0b9444 !important;
 }
 
 .btn-danger:hover {
-    background-color: var(--color-danger-hover) !important;
+    background-color: #cc0000 !important;
 }
 
-.btn-outline-secondary {
-    background: white;
-    border: 2px solid var(--color-border) !important;
-    color: var(--color-text-secondary);
-}
-
-.btn-outline-secondary:hover {
-    background: var(--color-bg-secondary);
-    border-color: var(--color-text-secondary) !important;
-}
-
-/* Footer */
+/* ===== FOOTER ===== */
 footer {
-    background: var(--color-info);
+    background: #00b5ad;
     color: white;
-    padding: var(--spacing-lg);
+    padding: 20px;
     text-align: center;
-    margin-top: var(--spacing-3xl);
 }
 
 footer a {
     color: white;
     display: inline-block;
-    text-decoration: none;
-    transition: all var(--transition-base);
-    margin: 0 var(--spacing-xs);
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 footer a:hover {
     opacity: 0.85;
-    transform: scale(1.05);
-    text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    header .nav-bar {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    table {
-        font-size: var(--font-size-sm);
-    }
-
-    table th,
-    table td {
-        padding: var(--spacing-sm);
-    }
+    transform: scale(1.12);
 }

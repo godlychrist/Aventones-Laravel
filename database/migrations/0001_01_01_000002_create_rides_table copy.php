@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('rides', function (Blueprint $table) {
             $table->id()->primary();
             $table->string('name');
-            $table->string('origin');
             $table->string('destination');
+            $table->string('arrival');
             $table->string('date');
-            $table->string('time');
             $table->string('space_cost');
             $table->integer('space');
 

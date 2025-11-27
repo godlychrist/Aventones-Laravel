@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>Registro de Usuario</h1>
+    <h1>Edicion de Usuario</h1>
 
     {{-- MOSTRAR ERRORES DE VALIDACIÓN --}}
     @if ($errors->any())
@@ -29,52 +29,48 @@
         {{ session('success') }}
     </div>
     @endif
-
-    <form action="{{ route('saveUser')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('updateUser', $user->cedula) }}" method="POST" enctype="multipart/form-data">
         @csrf
-
-        <div>
-            <label>Cédula:</label>
-            <input type="text" name="cedula" value="{{ old('cedula') }}" required>
-        </div>
+        @method('PUT')
 
         <div>
             <label>Nombre:</label>
-            <input type="text" name="name" value="{{ old('name') }}" required>
+            <input type="text" name="name" value="{{ $user->name }}" required>
         </div>
 
         <div>
             <label>Apellido:</label>
-            <input type="text" name="lastname" value="{{ old('lastname') }}" required>
+            <input type="text" name="lastname" value="{{ $user->lastname }}" required>
         </div>
 
         <div>
             <label>Fecha de Nacimiento:</label>
-            <input type="date" name="birthDate" value="{{ old('birthDate') }}" required>
+            <input type="date" name="birthDate" value="{{ $user->birthDate }}" required>
         </div>
 
         <div>
             <label>Email:</label>
-            <input type="email" name="email" value="{{ old('email') }}" required>
+            <input type="email" name="email" value="{{ $user->email }}" required>
         </div>
 
         <div>
             <label>Teléfono:</label>
-            <input type="text" name="phoneNum" value="{{ old('phoneNum') }}" required>
-        </div>
-
-        <div>
-            <label>Contraseña:</label>
-            <input type="password" name="password" required>
+            <input type="text" name="phoneNum" value="{{ $user->phoneNum }}" required>
         </div>
 
         <label>Imagen:</label>
+        @if ($user->image)
+        <img src="{{ asset('storage/' . $user->image) }}" alt="Imagen actual" width="120"
+            style="display:block; margin-bottom:10px;">
+        @endif
+
+        <label for="image">Cambiar Imagen:</label>
         <input type="file" name="image">
 
-        <button type="submit">Registrar</button>
+
+        <button type="submit">Editar</button>
     </form>
 
-    <a href="{{ route('showUsers') }}"> Show Users </a>
 </body>
 
 </html>
