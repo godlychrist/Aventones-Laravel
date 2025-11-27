@@ -1,47 +1,70 @@
-/* Estilo General */
-body {
-    background-color: #f4f6f9; /* Fondo blanco grisáceo */
-    color: #333333;           /* Texto oscuro */
-    font-family: 'Arial', sans-serif;
+/* ===================================
+   IMPORT GLOBAL VARIABLES
+   =================================== */
+@import url('variables.css');
+
+/* ===================================
+   PROFILE PAGE STYLES
+   =================================== */
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Card principal del perfil */
+body {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Profile Wrapper */
 .profile-wrapper {
-    background-color: #ffffff; /* Fondo blanco */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    border-radius: 10px;
-    padding: 20px;
+    background-color: var(--color-bg-primary);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     width: 100%;
     max-width: 720px;
+    margin: var(--spacing-xl) auto;
 }
 
-/* Título AVENTONES */
 .brand-title {
-    font-size: 36px;
-    color: #00b5ad; /* Turquesa */
-    margin-bottom: 10px;
+    font-size: var(--font-size-4xl);
+    color: var(--color-info);
+    margin-bottom: var(--spacing-md);
+    font-weight: var(--font-weight-extrabold);
+    text-align: center;
 }
 
-/* Subtítulo (Mi Perfil) */
 .profile-wrapper h2 {
-    color: #6c757d; /* Gris Bootstrap */
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
 }
 
-/* Fila del avatar */
+/* Avatar Row */
 .avatar-row {
+    display: flex;
     align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
-/* Avatar redondo */
 .avatar-wrapper {
     width: 80px;
     height: 80px;
-    border: 2px solid #00b5ad;
-    border-radius: 50%;
+    border: 2px solid var(--color-info);
+    border-radius: var(--radius-full);
     overflow: hidden;
     flex-shrink: 0;
+    box-shadow: var(--shadow-md);
 }
 
 .avatar-wrapper img {
@@ -50,101 +73,141 @@ body {
     object-fit: cover;
 }
 
-/* Formulario */
+/* Form */
 .formulario-profile {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
 }
 
-/* Labels */
 .form-label {
-    color: #00b5ad; /* Turquesa */
-    font-weight: bold;
+    color: var(--color-info);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+    display: block;
 }
 
-/* Inputs */
 .form-control {
-    background-color: #f7f7f7;
-    color: #333333;
-    border: 1px solid #00b5ad;
-    border-radius: 5px;
-    padding: 10px;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    width: 100%;
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    transition: all var(--transition-base);
 }
 
 .form-control:focus {
-    border-color: #009c94;
-    box-shadow: 0 0 5px rgba(0, 185, 173, 0.4);
+    border-color: var(--color-info);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    outline: none;
 }
 
-/* Botón Guardar */
+/* Buttons */
 .profile-btn {
-    background-color: #00b5ad;
-    color: #ffffff;
+    background-color: var(--color-info);
+    color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
+    padding: 0.75rem var(--spacing-lg);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+    width: 100%;
 }
 
 .profile-btn:hover {
-    background-color: #009c94;
+    background-color: var(--color-info-hover);
     transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
-/* Link "volver al panel" */
+.profile-btn:active {
+    transform: translateY(0);
+}
+
+.btn-return-panel {
+    display: inline-block;
+    padding: 0.75rem var(--spacing-lg);
+    background-color: white;
+    color: var(--color-info);
+    border: 2px solid var(--color-info);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    text-align: center;
+}
+
+.btn-return-panel:hover {
+    background-color: var(--color-info);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-return-panel:active {
+    transform: translateY(0);
+}
+
+/* Profile Link */
 .profile-link {
-    font-size: 14px;
+    font-size: var(--font-size-sm);
+    text-align: center;
+    margin-top: var(--spacing-md);
 }
 
 .profile-link a {
-    color: #00b5ad;
+    color: var(--color-info);
     text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-base);
 }
 
 .profile-link a:hover {
+    color: var(--color-info-hover);
     text-decoration: underline;
 }
 
-/* Footer igual que el login */
+/* Footer */
 footer {
-    background-color: #00b5ad; /* Turquesa */
-    padding: 20px;
+    background-color: var(--color-info);
+    padding: var(--spacing-lg);
     text-align: center;
     color: white;
-    margin-top: 30px;
+    margin-top: var(--spacing-xl);
 }
 
 footer a {
     color: white;
     text-decoration: none;
+    transition: opacity var(--transition-base);
 }
 
 footer a:hover {
+    opacity: 0.8;
     text-decoration: underline;
 }
 
-/* Botón "Volver al panel" */
-.btn-return-panel {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #ffffff;
-    color: #00b5ad;
-    border: 2px solid #00b5ad;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-}
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-wrapper {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) auto;
+    }
 
-.btn-return-panel:hover {
-    background-color: #00b5ad;
-    color: #ffffff;
-    text-decoration: none;
-    transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    .brand-title {
+        font-size: var(--font-size-3xl);
+    }
+
+    .avatar-row {
+        flex-direction: column;
+        text-align: center;
+    }
 }

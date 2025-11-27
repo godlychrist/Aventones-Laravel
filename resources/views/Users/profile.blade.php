@@ -89,10 +89,10 @@
     {{-- Footer turquesa, igual estilo que login --}}
     <footer class="footer text-center mt-4">
         <nav class="footer-nav mb-2">
-            <a href="/pages/ride.php">Rides</a> |
-            <a href="/login">Login</a> |
-            <a href="/registration_passenger">Registro Pasajero</a> |
-            <a href="/registration_driver">Registro Conductor</a>
+            <a href="{{ route('/index') }}">Rides</a> |
+            <a href="{{ route('login') }}">Login</a> |
+            <a href="{{ route('register') }}">Registro Pasajero</a> |
+            <a href="{{ route('registerDriver') }}">Registro Conductor</a>
         </nav>
         <p class="footer-copy">© Aventones.com</p>
     </footer>

@@ -93,7 +93,7 @@
 
             {{-- Link Login --}}
             <p class="register-text text-center mt-3">
-                ¿Ya tienes cuenta? <a href="/login">Inicia sesión</a>
+                ¿Ya tienes cuenta? <a href="{{ route('login') }}">Inicia sesión</a>
             </p>
         </form>
 
@@ -102,9 +102,9 @@
 
 <footer class="footer text-center mt-4">
     <nav class="footer-nav mb-2">
-        <a href="/login">Login</a> |
-        <a href="/registration_passenger">Registro Pasajero</a> |
-        <a href="/registration_driver">Registro Conductor</a>
+        <a href="{{ route('login') }}">Login</a> |
+        <a href="{{ route('register') }}">Registro Pasajero</a> |
+        <a href="{{ route('registerDriver') }}">Registro Conductor</a>
     </nav>
     <p class="footer-copy">© Aventones.com</p>
 </footer>
