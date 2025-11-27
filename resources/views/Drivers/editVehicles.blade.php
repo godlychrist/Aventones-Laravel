@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/vehicles.css') }}">
 </head>
 
+
 <body>
 <div class="wrapper container-fluid px-3">
 
