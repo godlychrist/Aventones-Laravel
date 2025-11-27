@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
 </head>
 
+
 <body>
     <main class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
         <div class="profile-wrapper shadow border rounded p-4 p-md-5 text-center d-flex flex-column align-items-center gap-3">
