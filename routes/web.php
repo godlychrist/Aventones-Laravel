@@ -6,13 +6,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RidesController;    
 use Illuminate\Support\Facades\Route;
+use App\Models\Ride;
 
 /**
  * Redirection Routes
  */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    $rides = Ride::all();
+    return view('welcome', compact('rides'));
 });
 
 Route::get('/login', function () {

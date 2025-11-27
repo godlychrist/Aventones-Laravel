@@ -39,7 +39,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 10000;
     transition: all var(--transition-base);
     box-shadow: var(--shadow-md);
 }
@@ -424,6 +424,55 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
     color: var(--color-text-primary);
+}
+
+/* Fix all button variants in dark mode */
+.dark-mode .btn-primary {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+}
+
+.dark-mode .btn-primary:hover {
+    background: transparent;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .btn-success {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+}
+
+.dark-mode .btn-success:hover {
+    background: transparent;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .btn-warning {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+}
+
+.dark-mode .btn-warning:hover {
+    background: transparent;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .btn-info {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+}
+
+.dark-mode .btn-info:hover {
+    background: transparent;
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* ===================================

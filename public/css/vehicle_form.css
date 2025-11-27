@@ -15,6 +15,8 @@
 body {
     font-family: var(--font-family-base);
     line-height: var(--line-height-normal);
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
     transition: background-color var(--transition-base), color var(--transition-base);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -62,42 +64,45 @@ body {
 }
 
 /* ===================================
-   MAIN CONTAINER
+   CONTAINER
    =================================== */
-main {
-    background-color: var(--color-bg-secondary);
-    transition: background-color var(--transition-base);
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
 }
 
-/* Registration Wrapper */
-.login-wrapper {
-    background: var(--color-bg-primary);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-md);
-    transition: all var(--transition-base);
-    animation: fadeInUp 0.5s ease;
-}
-
-.brand-title {
+/* ===================================
+   HEADINGS
+   =================================== */
+h2 {
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary);
-    transition: color var(--transition-base);
-}
-
-h2.h5 {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-lg);
     transition: color var(--transition-base);
 }
 
 /* ===================================
-   FORM STYLES
+   CARDS
    =================================== */
-.formulario-login {
-    width: 100%;
+.card {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border: 1px solid var(--color-border);
+    animation: fadeInUp 0.5s ease;
 }
 
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ===================================
+   FORMS
+   =================================== */
 .form-label {
     display: block;
     margin-bottom: var(--spacing-xs);
@@ -132,25 +137,24 @@ h2.h5 {
 /* ===================================
    BUTTONS
    =================================== */
-.login-btn,
-.btn-primary {
-    width: 100%;
-    padding: 0.625rem 1rem;
-    background-color: var(--color-text-primary);
-    color: white;
-    border: none;
-    border-radius: var(--radius-sm);
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
-    cursor: pointer;
     font-family: inherit;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
 }
 
-.login-btn::before,
-.btn-primary::before {
+.btn::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -163,103 +167,47 @@ h2.h5 {
     transition: width 0.6s, height 0.6s;
 }
 
-.login-btn:hover::before,
-.btn-primary:hover::before {
+.btn:hover::before {
     width: 300px;
     height: 300px;
 }
 
-.login-btn:hover,
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Black button (primary action) */
+.btn-success,
+.btn-primary {
+    background-color: var(--color-text-primary);
+    color: white;
+    border-color: var(--color-text-primary);
+}
+
+.btn-success:hover,
 .btn-primary:hover {
     background-color: #1f2937;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.login-btn:active,
+.btn-success:active,
 .btn-primary:active {
     background-color: #111827;
     transform: translateY(0);
 }
 
-/* ===================================
-   LINKS
-   =================================== */
-.register-text {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
-    text-align: center;
-    margin-top: var(--spacing-md);
-}
-
-.register-text a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: all var(--transition-base);
-    position: relative;
-}
-
-.register-text a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width var(--transition-base);
-}
-
-.register-text a:hover::after {
-    width: 100%;
-}
-
-/* ===================================
-   FOOTER
-   =================================== */
-footer {
-    padding: var(--spacing-lg);
-    text-align: center;
+/* White/outline button (secondary action) */
+.btn-secondary {
     background: transparent;
-    margin-top: var(--spacing-xl);
-}
-
-.footer-nav {
-    margin-bottom: var(--spacing-sm);
-}
-
-.footer-nav a {
     color: var(--color-text-secondary);
-    text-decoration: none;
-    font-size: 0.875rem;
-    transition: color var(--transition-base);
-    position: relative;
+    border-color: var(--color-border);
 }
 
-.footer-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width var(--transition-base);
-}
-
-.footer-nav a:hover {
-    color: var(--color-primary);
-}
-
-.footer-nav a:hover::after {
-    width: 100%;
-}
-
-.footer-copy {
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin: 0;
+.btn-secondary:hover {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-text-secondary);
+    color: var(--color-text-primary);
 }
 
 /* ===================================
@@ -274,23 +222,15 @@ footer {
     --color-border: rgba(255, 255, 255, 0.2);
 }
 
-.dark-mode main {
+.dark-mode body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
 }
 
-.dark-mode .login-wrapper {
+.dark-mode .card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode .brand-title {
-    color: #ffffff;
-}
-
-.dark-mode .form-label {
-    color: #e5e7eb;
 }
 
 .dark-mode .form-control {
@@ -309,33 +249,34 @@ footer {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
-.dark-mode .login-btn,
+.dark-mode .btn-success,
 .dark-mode .btn-primary {
     background: #ffffff;
     color: #000000;
     border: 2px solid #ffffff;
 }
 
-.dark-mode .login-btn:hover,
+.dark-mode .btn-success:hover,
 .dark-mode .btn-primary:hover {
     background: transparent;
     color: #ffffff;
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
-.dark-mode .login-btn:active,
+.dark-mode .btn-success:active,
 .dark-mode .btn-primary:active {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.dark-mode .register-text a,
-.dark-mode .footer-nav a {
-    color: #ffffff;
+.dark-mode .btn-secondary {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-text-secondary);
 }
 
-.dark-mode .register-text a::after,
-.dark-mode .footer-nav a::after {
-    background: #ffffff;
+.dark-mode .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--color-text-primary);
 }
 
 .dark-mode .theme-toggle {
@@ -350,45 +291,6 @@ footer {
 .dark-mode .moon-icon {
     color: #ffffff;
     display: block;
-}
-
-/* Fix Bootstrap classes in dark mode */
-.dark-mode .border-primary {
-    border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-.dark-mode .shadow {
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-}
-
-.dark-mode .text-dark {
-    color: #f9fafb !important;
-}
-
-.dark-mode .text-secondary {
-    color: #d1d5db !important;
-}
-
-.dark-mode .alert {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    color: #f9fafb !important;
-}
-
-.dark-mode .alert-danger {
-    background: rgba(239, 68, 68, 0.2) !important;
-    border-color: rgba(239, 68, 68, 0.4) !important;
-    color: #fecaca !important;
-}
-
-/* Fix row and column gaps */
-.dark-mode .row {
-    color: var(--color-text-primary);
-}
-
-.dark-mode .col-12,
-.dark-mode .col-md-6 {
-    color: var(--color-text-primary);
 }
 
 /* ===================================
@@ -410,10 +312,6 @@ footer {
    RESPONSIVE DESIGN
    =================================== */
 @media (max-width: 640px) {
-    .login-wrapper {
-        padding: var(--spacing-md);
-    }
-
     .theme-toggle {
         top: var(--spacing-sm);
         right: var(--spacing-sm);
@@ -436,10 +334,8 @@ footer {
     }
 }
 
-.login-btn:focus-visible,
-.btn-primary:focus-visible,
-.register-text a:focus-visible,
-.footer-nav a:focus-visible {
+.btn:focus-visible,
+.form-control:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
