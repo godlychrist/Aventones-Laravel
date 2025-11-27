@@ -11,34 +11,45 @@ use Illuminate\View\View;
 
 class VehicleController extends Controller
 {
-    // LISTAR VEHÍCULOS DEL USUARIO LOGUEADO
+    /**
+     * Display a list of vehicles for the authenticated user
+     * 
+     * @return View The vehicles list view
+     */
     public function index(): View
     {
         $userCedula = Auth::user()->cedula;
 
         $vehicles = Vehicle::where('user_id', $userCedula)->get();
 
-        return view('vehicles', compact('vehicles'));
+        return view('Drivers.showVehicles', compact('vehicles'));
     }
 
-    // FORMULARIO DE CREACIÓN
+    /**
+     * Show the form for creating a new vehicle
+     * 
+     * @return View The vehicle creation form view
+     */
     public function create(): View
     {
-        // resources/views/vehicle_create.blade.php
-        return view('vehicle_create');
+        return view('Drivers.registerVehicles');
     }
 
-    // GUARDAR VEHÍCULO NUEVO
+    /**
+     * Store a newly created vehicle in the database
+     * 
+     * Links the vehicle to the authenticated user and handles image upload.
+     * 
+     * @param VehicleRequest $request The validated vehicle request
+     * @return RedirectResponse Redirects to vehicles list with success message
+     */
     public function store(VehicleRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        // Vincularlo al usuario logueado (users.cedula)
         $data['user_id'] = Auth::user()->cedula;
 
-        // Guardar imagen si viene
         if ($request->hasFile('image')) {
-            // Guarda en storage/app/public/vehicles
             $data['image'] = $request->file('image')->store('vehicles', 'public');
         }
 
@@ -49,26 +60,36 @@ class VehicleController extends Controller
             ->with('success', 'Vehículo creado correctamente.');
     }
 
-    // FORMULARIO DE EDICIÓN
+    /**
+     * Show the form for editing the specified vehicle
+     * 
+     * @param Vehicle $vehicle The vehicle model instance
+     * @return View The vehicle edit form view
+     */
     public function edit(Vehicle $vehicle): View
     {
-        // Usa la vista: resources/views/Drivers/editVehicles.blade.php
         return view('Drivers.editVehicles', compact('vehicle'));
     }
 
-    // ACTUALIZAR
+    /**
+     * Update the specified vehicle in the database
+     * 
+     * Handles image replacement if a new image is uploaded.
+     * 
+     * @param VehicleRequest $request The validated vehicle request
+     * @param Vehicle $vehicle The vehicle model instance
+     * @return RedirectResponse Redirects to vehicles list with success message
+     */
     public function update(VehicleRequest $request, Vehicle $vehicle): RedirectResponse
     {
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
 
-            // Borra imagen anterior si existe
             if ($vehicle->image) {
                 Storage::disk('public')->delete($vehicle->image);
             }
 
-            // Sube nueva y guarda el path
             $data['image'] = $request->file('image')->store('vehicles', 'public');
         }
 
@@ -79,7 +100,14 @@ class VehicleController extends Controller
             ->with('success', 'Vehículo actualizado correctamente.');
     }
 
-    // ELIMINAR
+    /**
+     * Remove the specified vehicle from the database
+     * 
+     * Deletes the vehicle's image from storage before removing the record.
+     * 
+     * @param Vehicle $vehicle The vehicle model instance
+     * @return RedirectResponse Redirects to vehicles list with success message
+     */
     public function destroy(Vehicle $vehicle): RedirectResponse
     {
         if ($vehicle->image) {
