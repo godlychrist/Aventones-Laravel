@@ -1,110 +1,168 @@
-/* Estilo General */
-body {
-    background-color: #f4f6f9; /* Fondo blanco grisaceo */
-    color: #333333; /* Texto oscuro */
-    font-family: 'Arial', sans-serif;
+/* ===================================
+   IMPORT GLOBAL VARIABLES
+   =================================== */
+@import url('variables.css');
+
+/* ===================================
+   REGISTRATION DRIVER STYLES
+   =================================== */
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* Login Wrapper */
+body {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-base);
+    line-height: var(--line-height-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Registration Wrapper */
 .login-wrapper {
-    background-color: #ffffff; /* Fondo blanco */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    border-radius: 10px;
-    padding: 20px;
+    background-color: var(--color-bg-primary);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     max-width: 700px;
     width: 100%;
+    margin: var(--spacing-xl) auto;
 }
 
 .brand-title {
-    font-size: 36px;
-    color: #00b5ad; /* Turquesa */
-    margin-bottom: 20px;
+    font-size: var(--font-size-4xl);
+    color: var(--color-info);
+    margin-bottom: var(--spacing-lg);
+    font-weight: var(--font-weight-extrabold);
+    text-align: center;
 }
 
 h2.h5 {
-    color: #00796b; /* Color para subtítulos */
-    margin-bottom: 20px;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
 }
 
-/* Alerta de Error */
+/* Alert */
 .alert {
-    background-color: #e0f7fa; /* Fondo azul claro */
-    color: #00796b; /* Texto oscuro */
-    border-radius: 5px;
-    padding: 15px;
+    background-color: rgba(6, 182, 212, 0.1);
+    color: var(--color-info);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--color-info);
 }
 
-/* Estilo del formulario */
+/* Form */
 .formulario-login {
     width: 100%;
 }
 
 .form-label {
-    color: #00b5ad; /* Color turquesa */
-    font-weight: bold;
+    color: var(--color-info);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+    display: block;
 }
 
 .form-control {
-    background-color: #f7f7f7; /* Fondo gris claro */
-    color: #333333;
-    border: 1px solid #00b5ad; /* Borde turquesa */
-    border-radius: 5px;
-    padding: 10px;
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
     width: 100%;
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    transition: all var(--transition-base);
 }
 
 .form-control:focus {
-    border-color: #009c94; /* Azul más oscuro en el enfoque */
-    box-shadow: 0 0 5px rgba(0, 185, 173, 0.5);
+    border-color: var(--color-info);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    outline: none;
 }
 
-/* Estilo para los botones */
+/* Button */
 .login-btn {
-    background-color: #00b5ad; /* Fondo turquesa */
+    background-color: var(--color-info);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 0.75rem var(--spacing-lg);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-base);
+    width: 100%;
+    margin-top: var(--spacing-md);
 }
 
 .login-btn:hover {
-    background-color: #009c94; /* Azul más oscuro al pasar el ratón */
+    background-color: var(--color-info-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
-/* Enlaces de registro */
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/* Register Text */
 .register-text {
-    color: #333333;
-    font-size: 14px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    text-align: center;
+    margin-top: var(--spacing-md);
 }
 
 .register-text a {
-    color: #00b5ad; /* Turquesa */
+    color: var(--color-info);
     text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-base);
 }
 
 .register-text a:hover {
+    color: var(--color-info-hover);
     text-decoration: underline;
 }
 
-/* Pie de Página */
+/* Footer */
 footer {
-    background-color: #00b5ad; /* Fondo turquesa */
-    padding: 20px;
+    background-color: var(--color-info);
+    padding: var(--spacing-lg);
     text-align: center;
     color: white;
-    margin-top: 30px;
+    margin-top: var(--spacing-xl);
 }
 
 footer a {
     color: white;
     text-decoration: none;
+    transition: opacity var(--transition-base);
 }
 
 footer a:hover {
+    opacity: 0.8;
     text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-wrapper {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) auto;
+    }
+
+    .brand-title {
+        font-size: var(--font-size-3xl);
+    }
 }

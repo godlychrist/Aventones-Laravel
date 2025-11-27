@@ -4,7 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Aventones | Login</title>
+    <meta name="description" content="Inicia sesión en Aventones para gestionar tus viajes">
+    
+    {{-- Google Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     {{-- CSS del login --}}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
@@ -41,9 +48,8 @@
                 @csrf
 
                 <div class="form-group">
-                    <label for="email" class="form-label">Email</label>
-                    <input id="email" name="email" type="email" class="form-input" placeholder="you@example.com"
-                        required />
+                    <label for="cedula" class="form-label">Cedula</label>
+                    <input id="cedula" name="cedula" type="text" class="form-input" placeholder="208560527" required />
                 </div>
 
                 <div class="form-group">
@@ -62,7 +68,7 @@
 
                 {{-- ENLACE A REGISTER COMO EN EL OTRO --}}
                 <div class="register-link">
-                    <a href="{{ route('indexM') }}">Register</a>
+                    <a href="{{ route('register') }}">Register</a>
                 </div>
             </form>
         </div>

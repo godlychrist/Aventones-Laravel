@@ -1,10 +1,3 @@
-# Driver's Crud 
-    - Register Driver
-    - Register Vehicles
-    - Show Vehicles
-    - Edit Vehicles
-    - Delete Vehicles
-
 # Rides Crud 
     - Register Ride
     - Show Ride
@@ -21,5 +14,6 @@
 
     - Accept/Reject Bookings
     - Send Email
+    - Rework Routes
     - 
   
