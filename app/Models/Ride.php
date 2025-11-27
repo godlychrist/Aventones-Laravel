@@ -34,3 +34,4 @@ class Ride extends Model
         return $this->belongsTo(Vehicle::class, 'vehicle_id', 'plateNum');
     }
 }
+
