@@ -63,6 +63,7 @@ header .nav-bar a {
     transition: all var(--transition-base);
 }
 
+
 @media (hover: hover) and (pointer: fine) {
     header .nav-bar a:hover {
         background: rgba(255, 255, 255, 0.2);
