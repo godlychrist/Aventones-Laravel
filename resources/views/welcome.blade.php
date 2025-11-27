@@ -93,11 +93,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td colspan="8" class="text-center text-muted py-4">
-                                    No tienes rides creados todavía.
-                                </td>
-                            </tr>
+                       @forelse($rides as $ride)
+                                <tr>
+                                    <td>{{ $ride->name }}</td>
+                                    <td>{{ $ride->origin }}</td>
+                                    <td>{{ $ride->destination }}</td>
+                                    <td>{{ $ride->date }} {{ $ride->time }}</td>
+                                    <td>{{ $ride->space }}</td>
+                                    <td>₡{{ number_format($ride->space_cost, 0) }}</td>
+                                    <td>{{ $ride->vehicle_id }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-success">Reservar</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-muted py-4">
+                                        No hay rides disponibles en este momento.
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
