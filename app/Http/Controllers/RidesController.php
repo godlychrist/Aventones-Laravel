@@ -88,7 +88,9 @@ class RidesController extends Controller
     public function edit($id): View
     {
         $ride = Ride::where('id', $id)->firstOrFail();
-        return view('Rides.editRides', compact('ride'));
+        $user = Auth::user();
+        $vehicles = Vehicle::where('user_id', $user->cedula)->get();
+        return view('Rides.editRides', compact('ride', 'vehicles'));
     }
 
     /**
