@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rides', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->id()->primary();
             $table->string('name');
+            $table->string('origin');
             $table->string('destination');
-            $table->string('arrival');
             $table->string('date');
+            $table->string('time');
             $table->string('space_cost');
             $table->integer('space');
 
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->integer('vehicle_id');
 
             $table->foreign('vehicle_id')
-                ->references('id')
+                ->references('plateNum')
                 ->on('vehicles')
                 ->onDelete('cascade');
             $table->string('status');
@@ -37,7 +38,7 @@ return new class extends Migration
         });
 
         Schema::create('bookings', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->id()->primary();
 
             $table->integer('user_id');
 
@@ -48,7 +49,7 @@ return new class extends Migration
 
             $table->string('status');
 
-            $table->integer('ride_id');
+            $table->unsignedBigInteger('ride_id');
 
             $table->foreign('ride_id')
                 ->references('id')

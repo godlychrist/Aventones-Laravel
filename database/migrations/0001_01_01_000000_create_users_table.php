@@ -27,7 +27,7 @@ return new class extends Migration
         });
 
         Schema::create('movements', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->integer('user_id');
             $table->foreign('user_id')
                 ->references('cedula')
@@ -55,7 +55,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('sessions');
         Schema::dropIfExists('movements');
+        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('rides');
+        Schema::dropIfExists('vehicles');
         Schema::dropIfExists('users');
+
     }
 };
