@@ -350,34 +350,35 @@ body {
     display: block;
 }
 
-.dark-mode .table thead {
-    background: rgba(255, 255, 255, 0.05);
+/* Custom Table Header Styling */
+.table thead th {
+    background-color: #f8f9fa;
+    color: var(--color-text-primary);
 }
 
 .dark-mode .table {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    --bs-table-bg: #000000;
+    --bs-table-color: #ffffff;
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #333333;
 }
 
-.dark-mode .table th,
-.dark-mode .table td {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #f9fafb;
+.dark-mode .table thead th {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #333333;
 }
 
-.dark-mode .table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.08);
+.dark-mode .table tbody td {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #333333;
 }
 
-.dark-mode .text-muted {
-    color: #9ca3af !important;
-}
-
-/* Fix Bootstrap table-light class in dark mode */
-.dark-mode .table-light {
-    background: rgba(255, 255, 255, 0.05) !important;
-    color: #f9fafb !important;
+.dark-mode .table tbody tr:hover td {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
 }
 
 .dark-mode .table-bordered {
