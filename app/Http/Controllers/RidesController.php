@@ -1,4 +1,7 @@
 <?php
+// ...existing code...
+
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RideRequest;
@@ -7,17 +10,14 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class RidesController extends Controller
 {
+    // ...existing code...
+
     /**
-     * Display a paginated list of rides
-     * 
-     * @param Request $request The HTTP request
-     * @return View The rides list view
+     * MIS RIDES (del driver logueado)
      */
     public function index(Request $request): View
     {
@@ -28,87 +28,103 @@ class RidesController extends Controller
     }
 
     /**
-     * Show the form for creating a new ride
-     * 
-     * @return View The ride creation form view
+     * RIDES DISPONIBLES PARA PASAJEROS (pantalla /index / welcome)
+     */
+    public function available(Request $request): View
+    {
+        // valores de filtro que vienen por GET
+        $selectedOrigin      = $request->input('origin');
+        $selectedDestination = $request->input('destination');
+        $selectedDate        = $request->input('date');
+
+        // base: solo rides activos
+        $query = Ride::where('status', 'active');
+
+        if ($selectedOrigin) {
+            $query->where('origin', $selectedOrigin);
+        }
+
+        if ($selectedDestination) {
+            $query->where('destination', $selectedDestination);
+        }
+
+        if ($selectedDate) {
+            $query->whereDate('date', $selectedDate);
+        }
+
+        // rides filtrados para la tabla
+        $rides = $query->orderBy('date')->orderBy('time')->get();
+
+        // para llenar los selects (sin repetir valores) y ordenados
+        $origins = Ride::where('status', 'active')
+            ->select('origin')->distinct()->orderBy('origin')->pluck('origin');
+
+        $destinations = Ride::where('status', 'active')
+            ->select('destination')->distinct()->orderBy('destination')->pluck('destination');
+
+        return view('welcome', [
+            'rides'               => $rides,
+            'origins'             => $origins,
+            'destinations'        => $destinations,
+            'selectedOrigin'      => $selectedOrigin,
+            'selectedDestination' => $selectedDestination,
+            'selectedDate'        => $selectedDate,
+        ]);
+    }
+
+    /**
+     * FORM CREAR RIDE
      */
     public function create(): View
     {
-        $user = Auth::user();
+        $user     = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->cedula)->get();
         return view('Rides/createRides', compact('vehicles', 'user'));
     }
 
     /**
-     * Store a newly created ride in the database
-     * 
-     * @param RideRequest $request The validated ride request
-     * @return RedirectResponse Redirects back to registration with success message
+     * GUARDAR RIDE
      */
     public function store(RideRequest $request): RedirectResponse
     {
-
         $data = $request->validated();
 
         Ride::create([
-            'name'             => $data['name'],
-            'origin'             => $data['origin'],
-            'destination'         => $data['destination'],
+            'name'        => $data['name'],
+            'origin'      => $data['origin'],
+            'destination' => $data['destination'],
             'date'        => $data['date'],
-            'time'            => $data['time'],
-            'space_cost'         => $data['space_cost'],
-            'space'         => $data['space'],
-            'user_id'         => $data['user_id'],
-            'vehicle_id'         => $data['vehicle_id'],
-            'status'         => $data['status'],
+            'time'        => $data['time'],
+            'space_cost'  => $data['space_cost'],
+            'space'       => $data['space'],
+            'user_id'     => $data['user_id'],
+            'vehicle_id'  => $data['vehicle_id'],
+            'status'      => $data['status'],
         ]);
 
         return redirect()->route('rides')
             ->with('success', 'Viaje registrado correctamente.');
     }
 
-    /**
-     * Display the specified ride
-     * 
-     * @param int $id The ride ID
-     * @return View The ride detail view
-     */
     public function show($id): View
     {
         $ride = Ride::find($id);
         return view('Rides.showRides', compact('ride'));
     }
 
-    /**
-     * Show the form for editing the specified ride
-     * 
-     * @param string $cedula The driver's cedula (ID number)
-     * @return View The ride edit form view
-     */
     public function edit($id): View
     {
-        $ride = Ride::where('id', $id)->firstOrFail();
-        $user = Auth::user();
+        $ride     = Ride::where('id', $id)->firstOrFail();
+        $user     = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->cedula)->get();
+
         return view('Rides.editRides', compact('ride', 'vehicles'));
     }
 
-    /**
-     * Update the specified ride in the database
-     * 
-     * @param RideRequest $request The validated ride request
-     * @param string $id The ride's ID
-     * @return RedirectResponse Redirects to rides list with success message
-     */
     public function update(RideRequest $request, $id): RedirectResponse
     {
-
         $ride = Ride::where('id', $id)->firstOrFail();
-        $data   = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('drivers', 'public');
-        }
+        $data = $request->validated();
 
         $ride->update($data);
 
@@ -116,15 +132,10 @@ class RidesController extends Controller
             ->with('success', 'Viaje actualizado correctamente.');
     }
 
-    /**
-     * Remove the specified ride from the database
-     * 
-     * @param string $id The ride's ID
-     * @return RedirectResponse Redirects to rides list with success message
-     */
     public function destroy($id): RedirectResponse
     {
         Ride::where('id', $id)->delete();
+
         return redirect()->route('rides')
             ->with('success', 'Viaje eliminado correctamente.');
     }
