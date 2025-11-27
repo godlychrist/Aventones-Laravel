@@ -8,7 +8,15 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
 
-    // ** Authenticate User **
+
+    /**
+     * Authenticate User
+     * 
+     * Validates user credentials and checks account status before logging in.
+     * 
+     * @param Request $request The HTTP request containing cedula and password
+     * @return RedirectResponse Redirects to index on success or back with errors on failure
+     */
     public function auth(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -27,11 +35,18 @@ class LoginController extends Controller
             }
 
             $request->session()->regenerate();
-            return redirect()->route('indexM');
+            return redirect()->route('/index');
         }
 
         return back()->withErrors([
             'cedula' => 'The provided credentials do not match our records.',
         ])->onlyInput('cedula');
+    }
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }
