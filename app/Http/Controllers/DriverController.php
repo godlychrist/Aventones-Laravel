@@ -11,22 +11,36 @@ use Illuminate\View\View;
 
 class DriverController extends Controller
 {
-    // ===== LISTADO =====
+    /**
+     * Display a paginated list of drivers
+     * 
+     * @param Request $request The HTTP request
+     * @return View The drivers list view
+     */
     public function index(Request $request): View
     {
         $drivers = Driver::where('userType', 'driver')->paginate(10);
 
-        return view('showDrivers', compact('drivers'))
+        return view('Drivers.showDrivers', compact('drivers'))
             ->with('i', ($request->input('page', 1) - 1) * $drivers->perPage());
     }
 
-    // ===== FORMULARIO DE CREACIÓN =====
+    /**
+     * Show the form for creating a new driver
+     * 
+     * @return View The driver registration form view
+     */
     public function create(): View
     {
-        return view('registration_driver');
+        return view('Users.registration_driver');
     }
 
-    // ===== GUARDAR =====
+    /**
+     * Store a newly created driver in the database
+     * 
+     * @param DriverRequest $request The validated driver request
+     * @return RedirectResponse Redirects back to registration with success message
+     */
     public function store(DriverRequest $request): RedirectResponse
     {
         $data = $request->validated();
@@ -55,21 +69,37 @@ class DriverController extends Controller
             ->with('success', 'Conductor registrado correctamente.');
     }
 
-    // ===== MOSTRAR UNO =====
+    /**
+     * Display the specified driver
+     * 
+     * @param int $id The driver ID
+     * @return View The driver detail view
+     */
     public function show($id): View
     {
         $driver = Driver::find($id);
         return view('showDriver', compact('driver'));
     }
 
-    // ===== EDITAR =====
+    /**
+     * Show the form for editing the specified driver
+     * 
+     * @param string $cedula The driver's cedula (ID number)
+     * @return View The driver edit form view
+     */
     public function edit($cedula): View
     {
         $driver = Driver::where('cedula', $cedula)->firstOrFail();
         return view('editDriver', compact('driver'));
     }
 
-    // ===== ACTUALIZAR =====
+    /**
+     * Update the specified driver in the database
+     * 
+     * @param DriverRequest $request The validated driver request
+     * @param string $cedula The driver's cedula (ID number)
+     * @return RedirectResponse Redirects to drivers list with success message
+     */
     public function update(DriverRequest $request, $cedula): RedirectResponse
     {
         $driver = Driver::where('cedula', $cedula)->firstOrFail();
@@ -85,6 +115,12 @@ class DriverController extends Controller
             ->with('success', 'Conductor actualizado correctamente.');
     }
 
+    /**
+     * Remove the specified driver from the database
+     * 
+     * @param string $cedula The driver's cedula (ID number)
+     * @return RedirectResponse Redirects to drivers list with success message
+     */
     public function destroy($cedula): RedirectResponse
     {
         Driver::where('cedula', $cedula)->delete();
