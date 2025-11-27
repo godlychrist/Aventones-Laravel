@@ -4,20 +4,15 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
-use App\Http\Controllers\RidesController;    
+use App\Http\Controllers\RidesController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Ride;
 
 /**
  * Redirection Routes
  */
 
-
-
-Route::get('/', function () {
-    $rides = Ride::all();
-    return view('welcome', compact('rides'));
-});
+// La ruta raíz debe llamar al controlador para enviar $origins / $destinations a la vista
+Route::get('/', [RidesController::class, 'available'])->name('home');
 
 Route::get('/login', function () {
     return view('Users.login');
@@ -35,14 +30,12 @@ Route::get('register', [UserController::class, 'create'])->name('register');
 Route::post('register', [UserController::class, 'store'])->name('saveUser');
 
 Route::middleware('auth')->group(function () { // Authenticated users only
-
     Route::get('users', [UserController::class, 'index'])->name('showUsers');
 
     Route::get('users/{cedula}/edit', [UserController::class, 'edit'])->name('editUser');
     Route::put('users/{cedula}', [UserController::class, 'update'])->name('updateUser');
 
     Route::delete('users/{cedula}', [UserController::class, 'destroy'])->name('deleteUser');
-
 });
 
 /**
@@ -54,12 +47,10 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 /**
  * CRUD Drivers
  */
-
 Route::get('registerDriver', [DriverController::class, 'create'])->name('registerDriver');
 Route::post('registerDriver', [DriverController::class, 'store'])->name('saveDriver');
 
 Route::middleware('auth')->group(function () { // Authenticated users only
-
     Route::get('drivers', [DriverController::class, 'index'])->name('showDrivers');
 
     Route::get('drivers/{cedula}/edit', [DriverController::class, 'edit'])->name('editDriver');
@@ -67,54 +58,38 @@ Route::middleware('auth')->group(function () { // Authenticated users only
     Route::put('drivers/{cedula}', [DriverController::class, 'update'])->name('updateDriver');
 
     Route::delete('drivers/{cedula}', [DriverController::class, 'destroy'])->name('deleteDriver');
-
 });
 
 /**
  * CRUD Vehicles
  */
 Route::middleware('auth')->group(function () { // Authenticated users only
+    Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
 
-    Route::get('/vehicles', [VehicleController::class, 'index'])
-        ->name('vehicles');
+    Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicle.create');
 
-    Route::get('/vehicles/create', [VehicleController::class, 'create'])
-        ->name('vehicle.create');
+    Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
 
-    Route::post('/vehicles', [VehicleController::class, 'store'])
-        ->name('vehicles.store');
+    Route::get('/vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])->name('vehicles.edit');
 
-    Route::get('/vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])
-        ->name('vehicles.edit');
+    Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])->name('vehicles.update');
 
-    Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update'])
-        ->name('vehicles.update');
-
-    Route::delete('/vehicles/{vehicle}', [VehicleController::class, 'destroy'])
-        ->name('vehicles.destroy');
+    Route::delete('/vehicles/{vehicle}', [VehicleController::class, 'destroy'])->name('vehicles.destroy');
 });
 
 /**
  * CRUD Rides
  */
-
 Route::middleware('auth')->group(function () { // Authenticated users only
+    Route::get('/rides', [RidesController::class, 'index'])->name('rides');
 
-    Route::get('/rides', [RidesController::class, 'index'])
-        ->name('rides');
+    Route::get('/rides/create', [RidesController::class, 'create'])->name('ride.create');
 
-    Route::get('/rides/create', [RidesController::class, 'create'])
-        ->name('ride.create');
+    Route::post('/rides', [RidesController::class, 'store'])->name('rides.store');
 
-    Route::post('/rides', [RidesController::class, 'store'])
-        ->name('rides.store');
+    Route::get('/rides/{ride}/edit', [RidesController::class, 'edit'])->name('rides.edit');
 
-    Route::get('/rides/{ride}/edit', [RidesController::class, 'edit'])
-        ->name('rides.edit');
+    Route::put('/rides/{ride}', [RidesController::class, 'update'])->name('rides.update');
 
-    Route::put('/rides/{ride}', [RidesController::class, 'update'])
-        ->name('rides.update');
-
-    Route::delete('/rides/{ride}', [RidesController::class, 'destroy'])
-        ->name('rides.destroy');
-}); 
+    Route::delete('/rides/{ride}', [RidesController::class, 'destroy'])->name('rides.destroy');
+});
