@@ -26,3 +26,4 @@ class RideRequest extends FormRequest
         ];
     }
 }
+
