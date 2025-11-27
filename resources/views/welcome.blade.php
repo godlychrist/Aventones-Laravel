@@ -1,7 +1,8 @@
-@php
-$user = Auth::user();
-$user = $user?-> name ?? 'Invitado';
 
+// ...existing code...
+@php
+    $user = Auth::user();
+    $user = $user?->name ?? 'Invitado';
 @endphp
 
 <!DOCTYPE html>
@@ -83,6 +84,13 @@ $user = $user?-> name ?? 'Invitado';
                             <label for="filter_origin" class="form-label fw-bold">Lugar de Salida (Origen)</label>
                             <select id="filter_origin" name="origin" class="form-select">
                                 <option value="">— Todos los Orígenes —</option>
+                                @isset($origins)
+                                    @foreach($origins as $origin)
+                                        <option value="{{ $origin }}" {{ (request('origin') ?? ($selectedOrigin ?? '')) == $origin ? 'selected' : '' }}>
+                                            {{ $origin }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                         </div>
 
@@ -91,12 +99,19 @@ $user = $user?-> name ?? 'Invitado';
                                 (Destino)</label>
                             <select id="filter_destination" name="destination" class="form-select">
                                 <option value="">— Todos los Destinos —</option>
+                                @isset($destinations)
+                                    @foreach($destinations as $destination)
+                                        <option value="{{ $destination }}" {{ (request('destination') ?? ($selectedDestination ?? '')) == $destination ? 'selected' : '' }}>
+                                            {{ $destination }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                         </div>
 
                         <div class="col-12 col-md-4">
                             <label for="filter_date" class="form-label fw-bold">Fecha</label>
-                            <input type="date" id="filter_date" name="date" class="form-control">
+                            <input type="date" id="filter_date" name="date" class="form-control" value="{{ request('date') ?? ($selectedDate ?? '') }}">
                         </div>
                     </div>
 
@@ -179,3 +194,4 @@ $user = $user?-> name ?? 'Invitado';
 </body>
 
 </html>
+// ...existing code...
