@@ -1,6 +1,4 @@
-@php 
-    $user = Auth::user();
-@endphp
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,77 +38,96 @@
     </button>
 
     <div class="container py-5">
-        <h2 class="text-center mb-4">Editar Ride</h2>
-
         <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
-            <form action="{{ route('rides.update', $ride->id) }}" method="post" enctype="multipart/form-data">
+            <h2 class="text-center mb-4">Editar Viaje</h2>
+            
+            <form action="{{ route('rides.update', $ride->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <input type="hidden" name="user_id" value="{{ $user->cedula }}">
-                
-                <div class="mb-3">
-                    <label class="form-label">Nombre del Ride</label>
-                    <input type="text" name="name" value="{{ old('name', $ride->name) }}" class="form-control" placeholder="Viaje a la universidad" required>
-                </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Origen</label>
-                    <input type="text" name="origin" value="{{ old('origin', $ride->origin) }}" class="form-control" placeholder="San José" required>
+                    <label class="form-label fw-bold">Nombre del Ride</label>
+                    <input type="text" name="name" class="form-control" value="{{ old('name', $ride->name) }}" required>
+                    @error('name')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Destino</label>
-                    <input type="text" name="destination" value="{{ old('destination', $ride->destination) }}" class="form-control" placeholder="Heredia" required>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Fecha</label>
-                        <input type="date" name="date" value="{{ old('date', $ride->date) }}" class="form-control" required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Hora</label>
-                        <input type="time" name="time" value="{{ old('time', $ride->time) }}" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Asientos disponibles</label>
-                        <input type="number" name="space" value="{{ old('space', $ride->space) }}" class="form-control" placeholder="4" min="1" required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Precio por asiento</label>
-                        <input type="number" name="space_cost" value="{{ old('space_cost', $ride->space_cost) }}" class="form-control" placeholder="1000" min="0" required>
-                    </div>
+                    <label class="form-label fw-bold">Lugar de Salida (Origen)</label>
+                    <input type="text" name="origin" class="form-control" value="{{ old('origin', $ride->origin) }}" required>
+                    @error('origin')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Vehículo</label>
+                    <label class="form-label fw-bold">Lugar de Llegada (Destino)</label>
+                    <input type="text" name="destination" class="form-control" value="{{ old('destination', $ride->destination) }}" required>
+                    @error('destination')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Fecha</label>
+                    <input type="date" name="date" class="form-control" value="{{ old('date', $ride->date) }}" required>
+                    @error('date')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Hora</label>
+                    <input type="time" name="time" class="form-control" value="{{ old('time', $ride->time) }}" required>
+                    @error('time')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Espacios Disponibles</label>
+                    <input type="number" name="space" class="form-control" value="{{ old('space', $ride->space) }}" min="1" required>
+                    @error('space')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Costo por Espacio</label>
+                    <input type="number" name="space_cost" class="form-control" value="{{ old('space_cost', $ride->space_cost) }}" step="0.01" min="0" required>
+                    @error('space_cost')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Vehículo</label>
                     <select name="vehicle_id" class="form-control" required>
                         <option value="">Seleccione un vehículo</option>
                         @foreach($vehicles as $vehicle)
-                            <option value="{{ $vehicle->plateNum }}" {{ (old('vehicle_id', $ride->vehicle_id) == $vehicle->plateNum) ? 'selected' : '' }}>
+                            <option value="{{ $vehicle->plateNum }}" {{ old('vehicle_id', $ride->vehicle_id) == $vehicle->plateNum ? 'selected' : '' }}>
                                 {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plateNum }})
                             </option>
                         @endforeach
                     </select>
+                    @error('vehicle_id')
+                        <span class="text-danger small">{{ $message }}</span>
+                    @enderror
                 </div>
 
-                <button type="submit" class="btn btn-success w-100">Actualizar Ride</button>
-
+                <button type="submit" class="btn btn-success w-100">Actualizar Viaje</button>
                 <a href="{{ route('rides') }}" class="btn btn-secondary mt-3 w-100">Cancelar</a>
             </form>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
 
-    // Check for saved theme preference or default to light mode
     const currentTheme = localStorage.getItem('theme') || 'light';
     if (currentTheme === 'dark') {
         body.classList.add('dark-mode');
@@ -119,7 +136,6 @@
     themeToggle.addEventListener('click', function() {
         body.classList.toggle('dark-mode');
 
-        // Save the theme preference
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('theme', 'dark');
         } else {
