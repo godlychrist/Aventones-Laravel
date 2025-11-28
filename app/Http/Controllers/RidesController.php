@@ -1,5 +1,4 @@
 <?php
-// ...existing code...
 
 
 namespace App\Http\Controllers;
@@ -14,8 +13,6 @@ use Illuminate\View\View;
 
 class RidesController extends Controller
 {
-    // ...existing code...
-
     /**
      * MIS RIDES (del driver logueado)
      */
@@ -32,12 +29,10 @@ class RidesController extends Controller
      */
     public function available(Request $request): View
     {
-        // valores de filtro que vienen por GET
         $selectedOrigin      = $request->input('origin');
         $selectedDestination = $request->input('destination');
         $selectedDate        = $request->input('date');
 
-        // base: solo rides activos
         $query = Ride::where('status', 'active');
 
         if ($selectedOrigin) {
@@ -52,10 +47,8 @@ class RidesController extends Controller
             $query->whereDate('date', $selectedDate);
         }
 
-        // rides filtrados para la tabla
         $rides = $query->orderBy('date')->orderBy('time')->get();
 
-        // para llenar los selects (sin repetir valores) y ordenados
         $origins = Ride::where('status', 'active')
             ->select('origin')->distinct()->orderBy('origin')->pluck('origin');
 
