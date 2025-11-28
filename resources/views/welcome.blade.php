@@ -1,5 +1,4 @@
 
-// ...existing code...
 @php
     $user = Auth::user();
     $user = $user?->name ?? 'Invitado';
