@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class DriverController extends Controller
 {
@@ -50,7 +52,7 @@ class DriverController extends Controller
             $imagePath = $request->file('image')->store('drivers', 'public');
         }
 
-        Driver::create([
+        $driver  = Driver::create([
             'cedula'           => $data['cedula'],
             'name'             => $data['name'],
             'lastname'         => $data['lastname'],
@@ -64,6 +66,8 @@ class DriverController extends Controller
             'token'            => Str::random(60),
             'expiration_token' => now()->addHours(1),
         ]);
+
+        Mail::to($data['email'])->send(new SendEmail($driver));
 
         return redirect()->route('registerDriver')
             ->with('success', 'Conductor registrado correctamente.');
@@ -126,5 +130,23 @@ class DriverController extends Controller
         Driver::where('cedula', $cedula)->delete();
         return redirect()->route('showDrivers')
             ->with('success', 'Conductor eliminado correctamente.');
+    }
+    public function activate($token)
+    {
+        $user = User::where('token', $token)->first();
+
+        if (!$user) {
+            return redirect()->route('login') 
+                ->with('error', 'El enlace de activación no es válido o ya fue utilizado.');
+        }
+
+        $user->update([
+            'state'            => 'active',
+            'token'            => null,
+            'expiration_token' => null,
+        ]);
+
+        return redirect()->route('login')
+            ->with('success', 'Cuenta activada correctamente.');
     }
 }

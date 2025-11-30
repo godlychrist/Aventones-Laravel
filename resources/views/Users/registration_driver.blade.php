@@ -39,7 +39,7 @@
         </svg>
     </button>
 
-<main class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
+<main class="container-fluid d-flex justify-content-center align-items-center min-vh-100 py-5">
 
     <div class="login-wrapper shadow border border-primary rounded p-4 p-md-5 text-center 
                 d-flex flex-column align-items-center gap-3"
@@ -136,15 +136,18 @@
 
 <script>
 const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
 const body = document.body;
 
 // Check for saved theme preference or default to light mode
 const currentTheme = localStorage.getItem('theme') || 'light';
 if (currentTheme === 'dark') {
+    html.classList.add('dark-mode');
     body.classList.add('dark-mode');
 }
 
 themeToggle.addEventListener('click', function() {
+    html.classList.toggle('dark-mode');
     body.classList.toggle('dark-mode');
 
     // Save the theme preference

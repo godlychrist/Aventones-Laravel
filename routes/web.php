@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 // La ruta raíz debe llamar al controlador para enviar $origins / $destinations a la vista
 Route::get('/', [RidesController::class, 'available'])->name('home');
 
+Route::get('/profile', function () {
+    return view ('Users.profile');
+})->name('/profile')->middleware('auth');
+
 Route::get('/login', function () {
     return view('Users.login');
 })->name('login');
 
 Route::get('/index', function () {
     return view('Users.index');
-})->name('/index');
+})->name('/index')->middleware('auth');
 
 
 /**
@@ -43,6 +47,7 @@ Route::middleware('auth')->group(function () { // Authenticated users only
  */
 Route::post('login', [LoginController::class, 'auth'])->name('loginAttempt');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('activate/{token}', [UserController::class, 'activate'])->name('activate');
 
 /**
  * CRUD Drivers

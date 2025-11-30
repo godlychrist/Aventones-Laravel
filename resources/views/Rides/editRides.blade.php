@@ -39,12 +39,12 @@
 
     <div class="container py-5">
         <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
-            <h2 class="text-center mb-4">Editar Viaje</h2>
-            
-            <form action="{{ route('rides.update', $ride->id) }}" method="POST">
+            <form action="{{ route('rides.update', $ride->id) }}"  method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-
+                <input type="hidden" name="user_id" value="{{ $user->cedula }}">
+                <input type="hidden" name="status" value="{{ old('status', $ride->status) }}">
+                
                 <div class="mb-3">
                     <label class="form-label fw-bold">Nombre del Ride</label>
                     <input type="text" name="name" class="form-control" value="{{ old('name', $ride->name) }}" required>

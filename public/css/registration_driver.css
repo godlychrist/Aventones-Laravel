@@ -12,9 +12,16 @@
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100vh;
+    background-color: var(--color-bg-secondary);
+    transition: background-color var(--transition-base);
+}
+
 body {
     font-family: var(--font-family-base);
     line-height: var(--line-height-normal);
+    background-color: var(--color-bg-secondary);
     transition: background-color var(--transition-base), color var(--transition-base);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -223,6 +230,7 @@ footer {
     text-align: center;
     background: transparent;
     margin-top: var(--spacing-xl);
+    transition: background-color var(--transition-base), color var(--transition-base);
 }
 
 .footer-nav {
@@ -272,10 +280,15 @@ footer {
     --color-bg-primary: rgba(255, 255, 255, 0.05);
     --color-bg-secondary: #0a0a0a;
     --color-border: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+}
+
+html.dark-mode {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%) !important;
 }
 
 .dark-mode main {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: transparent;
 }
 
 .dark-mode .login-wrapper {
@@ -311,21 +324,25 @@ footer {
 
 .dark-mode .login-btn,
 .dark-mode .btn-primary {
-    background: #ffffff;
-    color: #000000;
-    border: 2px solid #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .dark-mode .login-btn:hover,
 .dark-mode .btn-primary:hover {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .dark-mode .login-btn:active,
 .dark-mode .btn-primary:active {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(0);
 }
 
 .dark-mode .register-text a,
@@ -350,6 +367,15 @@ footer {
 .dark-mode .moon-icon {
     color: #ffffff;
     display: block;
+}
+
+.dark-mode footer {
+    background: transparent;
+    color: var(--color-text-primary);
+}
+
+.dark-mode .footer-copy {
+    color: var(--color-text-muted);
 }
 
 /* Fix Bootstrap classes in dark mode */

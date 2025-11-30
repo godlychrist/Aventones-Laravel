@@ -79,7 +79,7 @@
                 </div>
                                 {{-- LINK VOLVER --}}
                             <p class="profile-link text-center mt-3">
-                    <a href="{{ url('/') }}" class="btn-return-panel">
+                    <a href="{{ route('/index') }}" class="btn-return-panel">
                         ⬅ Volver al panel
                     </a>
                 </p>      
