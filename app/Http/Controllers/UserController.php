@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use App\Mail\SendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -54,7 +56,7 @@ class UserController extends Controller
             $imagePath = $request->file('image')->store('users', 'public');
         }
 
-        User::create([
+        $user = User::create([
             'cedula'           => $data['cedula'] ?? null,
             'name'             => $data['name'] ?? null,
             'lastname'         => $data['lastname'] ?? null,
@@ -68,6 +70,7 @@ class UserController extends Controller
             'token'            => Str::random(60),
             'expiration_token' => now()->addHours(1),
         ]);
+        Mail::to($data['email'])->send(new SendEmail($user));
 
         return redirect()->route('register')
             ->with('success', 'Usuario registrado correctamente.');
@@ -134,5 +137,21 @@ class UserController extends Controller
         User::where('cedula', $cedula)->delete();
         return Redirect::route('showUsers')
             ->with('success', 'User deleted successfully');
+    }
+
+    public function activate($token)
+    {
+        $user = User::where('token', $token)->first();
+        if ($user) {
+            $user->update([
+                'state' => 'active',
+                'token' => null,
+                'expiration_token' => null,
+            ]);
+            return redirect()->route('login')
+                ->with('success', 'User activated successfully');
+        }
+        return redirect()->route('login')
+            ->with('error', 'Invalid activation token');
     }
 }
