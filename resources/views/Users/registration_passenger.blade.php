@@ -38,7 +38,7 @@
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
   </button>
-  <main class="container d-flex justify-content-center align-items-center min-vh-100 py-5">
+  <main class="container-fluid d-flex justify-content-center align-items-center min-vh-100 py-5">
     <div class="login-wrapper shadow border border-primary rounded p-4 p-md-5 text-center d-flex flex-column align-items-center gap-3"
       style="max-width: 700px; width:100%;">
       <h1 class="brand-title fw-bold text-primary m-0">AVENTONES</h1>
@@ -148,15 +148,18 @@
 
   <script>
   const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
   const body = document.body;
 
   // Check for saved theme preference or default to light mode
   const currentTheme = localStorage.getItem('theme') || 'light';
   if (currentTheme === 'dark') {
+      html.classList.add('dark-mode');
       body.classList.add('dark-mode');
   }
 
   themeToggle.addEventListener('click', function() {
+      html.classList.toggle('dark-mode');
       body.classList.toggle('dark-mode');
 
       // Save the theme preference
