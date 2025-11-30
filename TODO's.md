@@ -1,11 +1,13 @@
 # Bookings Crud
     - Register Bookings
-    
+    - Show Bookings
+    - Edit Bookings
+    - Delete Bookings
+
 # Extras 
 
     - Accept/Reject Bookings
-    - Script
-    - New Features
-    - Validations
-    - Alerts
+    - Send Email
+    - Rework Routes
     - 
+  
