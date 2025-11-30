@@ -43,10 +43,11 @@
         <h2 class="text-center mb-4">Editar Ride</h2>
 
         <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
-            <form action="{{ route('rides.update', $ride->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('rides.update', $ride->id) }}"  method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="user_id" value="{{ $user->cedula }}">
+                <input type="hidden" name="status" value="{{ old('status', $ride->status) }}">
                 
                 <div class="mb-3">
                     <label class="form-label">Nombre del Ride</label>
