@@ -207,7 +207,7 @@
         @endforelse
 
         <div class="mt-4">
-            <a href="{{ route('/index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('index') }}" class="btn btn-outline-secondary">
                 ← Volver al Panel
             </a>
         </div>
