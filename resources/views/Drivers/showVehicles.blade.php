@@ -176,7 +176,7 @@
             <div class="header-content d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
 
                 <nav class="nav-bar d-flex flex-column flex-sm-row align-items-center gap-3">
-                    <a href="{{ route('/index') }}">Panel</a>
+                    <a href="{{ route('index') }}">Panel</a>
                     <a href="{{ route('rides') }}">Rides</a>
                     <a href="{{ route('vehicles') }}" class="active">Vehículos</a>
                     <a href="#">Reservas</a>
@@ -279,7 +279,7 @@
     <!-- FOOTER -->
     <footer class="footer text-center mt-4">
         <nav class="footer-nav mb-2">
-            <a href="{{ route('/index') }}">Panel</a> |
+            <a href="{{ route('index') }}">Panel</a> |
             <a href="{{ route('rides') }}">Rides</a> |
             <a href="{{ route('vehicles') }}" class="active">Vehículos</a> |
             <a href="#">Reservas</a>
