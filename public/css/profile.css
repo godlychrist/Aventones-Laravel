@@ -1,68 +1,36 @@
-/* ===================================
-   IMPORT GLOBAL VARIABLES
-   =================================== */
 @import url('variables.css');
 
-/* ===================================
-   PROFILE PAGE STYLES
-   =================================== */
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: var(--color-bg-secondary);
-    color: var(--color-text-primary);
-    font-family: var(--font-family-base);
-    line-height: var(--line-height-normal);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Profile Wrapper */
-.profile-wrapper {
-    background-color: var(--color-bg-primary);
-    box-shadow: var(--shadow-lg);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+/* Card del perfil centrada y más estrecha */
+.profile-page .profile-card {
+    max-width: 500px;
     width: 100%;
-    max-width: 720px;
-    margin: var(--spacing-xl) auto;
+    margin: 0 auto;
 }
 
-.brand-title {
-    font-size: var(--font-size-4xl);
-    color: var(--color-info);
-    margin-bottom: var(--spacing-md);
-    font-weight: var(--font-weight-extrabold);
-    text-align: center;
+/* Layout general del formulario */
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
 }
 
-.profile-wrapper h2 {
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-semibold);
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
+.formulario-profile {
+    width: 100%;
 }
 
-/* Avatar Row */
+/* Avatar */
 .avatar-row {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
 }
 
 .avatar-wrapper {
     width: 80px;
     height: 80px;
+    border-radius: 50%;
     border: 2px solid var(--color-info);
-    border-radius: var(--radius-full);
     overflow: hidden;
     flex-shrink: 0;
     box-shadow: var(--shadow-md);
@@ -74,141 +42,96 @@ body {
     object-fit: cover;
 }
 
-/* Form */
-.formulario-profile {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+.avatar-input {
+    flex: 1;
 }
 
-.form-label {
+/* Labels e inputs */
+.formulario-profile .form-label {
     color: var(--color-info);
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-sm);
     margin-bottom: var(--spacing-xs);
-    display: block;
 }
 
-.form-control {
+.formulario-profile .form-control {
     background-color: var(--color-bg-secondary);
     color: var(--color-text-primary);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: 0.75rem;
-    width: 100%;
     font-size: var(--font-size-base);
-    font-family: inherit;
     transition: all var(--transition-base);
 }
 
-.form-control:focus {
+.formulario-profile .form-control:focus {
     border-color: var(--color-info);
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
     outline: none;
 }
 
-/* Buttons */
-.profile-btn {
-    background-color: var(--color-info);
-    color: white;
-    border: none;
-    padding: 0.75rem var(--spacing-lg);
+/* Mensajes */
+.text-muted {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+}
+
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.5);
+    color: var(--color-success);
     border-radius: var(--radius-md);
-    cursor: pointer;
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
-    transition: all var(--transition-base);
-    width: 100%;
+    padding: var(--spacing-sm);
 }
 
-.profile-btn:hover {
-    background-color: var(--color-info-hover);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+/* ---------- INPUT DE ARCHIVO CUSTOM ---------- */
+
+.file-input-hidden {
+    display: none;
 }
 
-.profile-btn:active {
-    transform: translateY(0);
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.btn-return-panel {
-    display: inline-block;
-    padding: 0.75rem var(--spacing-lg);
-    background-color: white;
-    color: var(--color-info);
-    border: 2px solid var(--color-info);
-    border-radius: var(--radius-md);
-    font-weight: var(--font-weight-semibold);
-    font-size: var(--font-size-sm);
-    text-decoration: none;
-    transition: all var(--transition-base);
-    text-align: center;
+.btn-file-small {
+    padding: 0.35rem 0.9rem;
+    font-size: 0.8rem;
 }
 
-.btn-return-panel:hover {
-    background-color: var(--color-info);
-    color: white;
-    text-decoration: none;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+.file-chosen {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.btn-return-panel:active {
-    transform: translateY(0);
-}
-
-/* Profile Link */
-.profile-link {
-    font-size: var(--font-size-sm);
-    text-align: center;
-    margin-top: var(--spacing-md);
-}
-
-.profile-link a {
-    color: var(--color-info);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: color var(--transition-base);
-}
-
-.profile-link a:hover {
-    color: var(--color-info-hover);
-    text-decoration: underline;
-}
-
-/* Footer */
-footer {
-    background-color: var(--color-info);
-    padding: var(--spacing-lg);
-    text-align: center;
-    color: white;
-    margin-top: var(--spacing-xl);
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-    transition: opacity var(--transition-base);
-}
-
-footer a:hover {
-    opacity: 0.8;
-    text-decoration: underline;
+/* Footer sin turquesa raro */
+.profile-page .dashboard-footer {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .profile-wrapper {
-        padding: var(--spacing-md);
-        margin: var(--spacing-md) auto;
-    }
-
-    .brand-title {
-        font-size: var(--font-size-3xl);
-    }
-
     .avatar-row {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
     }
+
+    .avatar-wrapper {
+        margin-bottom: var(--spacing-xs);
+    }
+}
+/* Forzar que cada campo del perfil sea columna: label arriba, input abajo */
+.profile-page .formulario-profile .field-group {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch;
+    gap: 0.35rem;
 }
