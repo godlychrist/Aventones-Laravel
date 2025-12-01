@@ -35,7 +35,7 @@ class LoginController extends Controller
             }
 
             $request->session()->regenerate();
-            return redirect()->route('/index');
+            return redirect()->route('index');
         }
 
         return back()->withErrors([
