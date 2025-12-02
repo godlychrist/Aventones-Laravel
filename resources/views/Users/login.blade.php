@@ -49,7 +49,7 @@
 
                 <div class="form-group">
                     <label for="cedula" class="form-label">Cedula</label>
-                    <input id="cedula" name="cedula" type="text" class="form-input" placeholder="208560527" required />
+                    <input id="cedula" name="cedula" type="text" class="form-input" placeholder="12345678" required />
                 </div>
 
                 <div class="form-group">
