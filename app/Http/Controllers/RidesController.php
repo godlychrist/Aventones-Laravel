@@ -111,7 +111,7 @@ class RidesController extends Controller
         $user     = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->cedula)->get();
 
-        return view('Rides.editRides', compact('ride', 'vehicles'));
+        return view('Rides.editRides', compact('ride', 'vehicles', 'user'));
     }
 
     public function update(RideRequest $request, $id): RedirectResponse
