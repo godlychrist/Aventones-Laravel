@@ -87,7 +87,8 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-bold">Espacios Disponibles</label>
-                    <input type="number" name="space" class="form-control" value="{{ old('space', $ride->space) }}" min="1" required>
+                    <input type="number" name="space" class="form-control" value="{{ old('space', $ride->space) }}" min="1" max="4" required>
+                    <small class="text-muted">Máximo según capacidad del vehículo</small>
                     @error('space')
                         <span class="text-danger small">{{ $message }}</span>
                     @enderror
@@ -106,8 +107,8 @@
                     <select name="vehicle_id" class="form-control" required>
                         <option value="">Seleccione un vehículo</option>
                         @foreach($vehicles as $vehicle)
-                            <option value="{{ $vehicle->plateNum }}" {{ old('vehicle_id', $ride->vehicle_id) == $vehicle->plateNum ? 'selected' : '' }}>
-                                {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plateNum }})
+                            <option value="{{ $vehicle->plateNum }}" data-capacity="{{ $vehicle->capacity }}" {{ old('vehicle_id', $ride->vehicle_id) == $vehicle->plateNum ? 'selected' : '' }}>
+                                {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plateNum }}) - Capacidad: {{ $vehicle->capacity }}
                             </option>
                         @endforeach
                     </select>
@@ -123,6 +124,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/vehicle_capacity_validator.js') }}"></script>
     
     <script>
     const themeToggle = document.getElementById('themeToggle');
