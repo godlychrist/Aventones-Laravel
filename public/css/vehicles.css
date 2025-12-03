@@ -142,6 +142,55 @@ body {
 }
 
 /* ===================================
+   CARDS
+   =================================== */
+.card {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+    border: 1px solid var(--color-border);
+}
+
+/* ===================================
+   FORMS
+   =================================== */
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    transition: color var(--transition-base);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-family: inherit;
+    transition: all var(--transition-base);
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-control::placeholder {
+    color: var(--color-text-muted);
+}
+
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+/* ===================================
    BUTTONS
    =================================== */
 .btn {
@@ -398,6 +447,39 @@ footer {
 .dark-mode .moon-icon {
     color: #ffffff;
     display: block;
+}
+
+/* Cards in dark mode */
+.dark-mode .card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Form controls in dark mode */
+.dark-mode .form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.dark-mode .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.dark-mode .form-control:focus {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .form-label {
+    color: #f9fafb;
+}
+
+.dark-mode .text-muted {
+    color: #9ca3af !important;
 }
 
 /* ===================================
