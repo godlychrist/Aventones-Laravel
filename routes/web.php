@@ -53,6 +53,13 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('activate/{token}', [UserController::class, 'activate'])->name('activate');
 
 /**
+ * Passwordless Login (Magic Link)
+ */
+Route::get('/magic-link', [LoginController::class, 'showMagicLinkForm'])->name('magic-link.request');
+Route::post('/magic-link', [LoginController::class, 'sendMagicLink'])->name('magic-link.send');
+Route::get('/magic-link/login/{token}', [LoginController::class, 'loginWithToken'])->name('magic-link.login');
+
+/**
  * CRUD Drivers
  */
 Route::get('registerDriver', [DriverController::class, 'create'])->name('registerDriver');
