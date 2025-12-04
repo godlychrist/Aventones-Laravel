@@ -98,7 +98,7 @@
                         Reservas y Perfil
                     </h3>
                     <div class="card-actions">
-                        <a href="/pages/myBookings.php" class="btn btn-warning">
+                        <a href="{{ route('bookings') }}" class="btn btn-warning">
                             <span>📋</span> Mis Reservas
                         </a>
                         <a href="/pages/profile.php" class="btn btn-info">
@@ -123,7 +123,7 @@
                         <a href="/index.php" class="btn btn-primary">
                             <span>🔍</span> Buscar Rides Disponibles
                         </a>
-                        <a href="/pages/myBookings.php" class="btn btn-warning">
+                        <a href="{{ route('bookings') }}" class="btn btn-warning">
                             <span>📋</span> Mis Reservas
                         </a>
                         <a href="/pages/profile.php" class="btn btn-info">
