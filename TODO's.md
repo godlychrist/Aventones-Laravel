@@ -1,11 +1,7 @@
-# Bookings Crud
-    - Register Bookings
-    
 # Extras 
 
-    - Accept/Reject Bookings
     - Script
-    - New Features
+    - One New Feature
     - Validations
     - Alerts
-    - 
+    - Admin Panel 
