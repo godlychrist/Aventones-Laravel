@@ -101,10 +101,12 @@
                         <a href="{{ route('bookings') }}" class="btn btn-warning">
                             <span>📋</span> Mis Reservas
                         </a>
-                        <a href="/pages/profile.php" class="btn btn-info">
+                        {{-- PERFIL: usa la ruta de Laravel --}}
+                        <a href="{{ route('profile') }}" class="btn btn-info">
                             <span>👤</span> Ver Perfil
                         </a>
-                        <a href="/logout" class="btn btn-outline">
+                        {{-- LOGOUT: ruta de Laravel --}}
+                        <a href="{{ route('logout') }}" class="btn btn-outline">
                             <span>🚪</span> Cerrar Sesión
                         </a>
                     </div>
@@ -120,16 +122,19 @@
                         Panel de Pasajero
                     </h3>
                     <div class="card-actions">
-                        <a href="/index.php" class="btn btn-primary">
+                        {{-- Buscar rides: home de Laravel --}}
+                        <a href="{{ route('home') }}" class="btn btn-primary">
                             <span>🔍</span> Buscar Rides Disponibles
                         </a>
                         <a href="{{ route('bookings') }}" class="btn btn-warning">
                             <span>📋</span> Mis Reservas
                         </a>
-                        <a href="/pages/profile.php" class="btn btn-info">
+                        {{-- Perfil --}}
+                        <a href="{{ route('profile') }}" class="btn btn-info">
                             <span>👤</span> Ver Perfil
                         </a>
-                        <a href="/logout" class="btn btn-outline">
+                        {{-- Logout --}}
+                        <a href="{{ route('logout') }}" class="btn btn-outline">
                             <span>🚪</span> Cerrar Sesión
                         </a>
                     </div>
@@ -145,10 +150,11 @@
                         Panel de Administrador
                     </h3>
                     <div class="card-actions">
-                        <a href="/pages/users.php" class="btn btn-primary">
+                        {{-- Aquí ya podrías usar route('showUsers') si quieres todo Laravel --}}
+                        <a href="{{ route('showUsers') }}" class="btn btn-primary">
                             <span>👥</span> Ver Usuarios
                         </a>
-                        <a href="/logout" class="btn btn-outline">
+                        <a href="{{ route('logout') }}" class="btn btn-outline">
                             <span>🚪</span> Cerrar Sesión
                         </a>
                     </div>
@@ -159,12 +165,13 @@
         {{-- Footer --}}
         <footer class="dashboard-footer">
             <nav class="footer-nav" aria-label="Footer navigation">
-                <a href="/index.php">Buscar Rides</a>
+                {{-- Buscar rides: a home --}}
+                <a href="{{ route('home') }}">Buscar Rides</a>
                 <span class="footer-separator">|</span>
                 <a href="/pages/myBookings.php">Mis Reservas</a>
                 @if ($isDriver)
                     <span class="footer-separator">|</span>
-                    <a href="/functions/showride.php">Mis Rides</a>
+                    <a href="{{ route('rides') }}">Mis Rides</a>
                     <span class="footer-separator">|</span>
                     <a href="{{ route('vehicles') }}">Mis Vehículos</a>
                 @endif
@@ -178,7 +185,6 @@
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
-        // Check for saved theme preference or default to light mode
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             body.classList.add('dark-mode');
@@ -187,7 +193,6 @@
         themeToggle.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
 
-            // Save the theme preference
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
             } else {
@@ -198,4 +203,3 @@
 </body>
 
 </html>
-

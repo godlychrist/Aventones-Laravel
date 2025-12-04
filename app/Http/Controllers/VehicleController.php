@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VehicleRequest;
 use App\Models\Vehicle;
+use App\Models\Ride;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -75,6 +76,7 @@ class VehicleController extends Controller
      * Update the specified vehicle in the database
      * 
      * Handles image replacement if a new image is uploaded.
+     * Also updates associated rides if capacity is reduced.
      * 
      * @param VehicleRequest $request The validated vehicle request
      * @param Vehicle $vehicle The vehicle model instance
@@ -83,6 +85,10 @@ class VehicleController extends Controller
     public function update(VehicleRequest $request, Vehicle $vehicle): RedirectResponse
     {
         $data = $request->validated();
+        
+        // Guardar la capacidad anterior para comparar
+        $oldCapacity = $vehicle->capacity;
+        $newCapacity = $data['capacity'];
 
         if ($request->hasFile('image')) {
 
@@ -95,9 +101,37 @@ class VehicleController extends Controller
 
         $vehicle->update($data);
 
+        // Si la capacidad se redujo, actualizar los rides asociados
+        if ($newCapacity < $oldCapacity) {
+            $this->updateAssociatedRides($vehicle->plateNum, $newCapacity);
+        }
+
         return redirect()
             ->route('vehicles')
             ->with('success', 'Vehículo actualizado correctamente.');
+    }
+
+    /**
+     * Update associated rides when vehicle capacity is reduced
+     * 
+     * @param string $vehiclePlateNum The vehicle plate number
+     * @param int $newCapacity The new vehicle capacity
+     * @return void
+     */
+    private function updateAssociatedRides(string $vehiclePlateNum, int $newCapacity): void
+    {
+        // Obtener todos los rides activos asociados a este vehículo
+        $rides = Ride::where('vehicle_id', $vehiclePlateNum)
+                    ->where('status', 'active')
+                    ->get();
+
+        foreach ($rides as $ride) {
+            // Si los asientos disponibles exceden la nueva capacidad, ajustarlos
+            if ($ride->space > $newCapacity) {
+                $ride->space = $newCapacity;
+                $ride->save();
+            }
+        }
     }
 
     /**

@@ -138,7 +138,7 @@
 
   <footer class="footer text-center mt-4">
     <nav class="footer-nav mb-2">
-      <a href="{{ route('/index') }}">Rides</a> |
+      <a href="{{ route('index') }}">Rides</a> |
       <a href="{{ route('login') }}">Login</a> |
       <a href="{{ route('register') }}">Registro Pasajero</a> |
       <a href="{{ route('registerDriver') }}">Registro Conductor</a>

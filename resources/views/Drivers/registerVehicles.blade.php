@@ -75,7 +75,8 @@
 
                 <div class="mb-3">
                     <label class="form-label">Capacidad de pasajeros</label>
-                    <input type="number" name="capacity" class="form-control" min="1" placeholder="4" required>
+                    <input type="number" name="capacity" class="form-control" min="1" max="4" placeholder="1-4" required>
+                    <small class="text-muted">Máximo 4 pasajeros</small>
                 </div>
 
                 <div class="mb-3">
@@ -90,6 +91,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/vehicle_capacity_validator.js') }}"></script>
     <script>
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;

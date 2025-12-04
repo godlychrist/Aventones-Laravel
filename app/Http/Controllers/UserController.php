@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
@@ -6,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use App\Mail\SendEmail;
@@ -13,16 +15,11 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-
     /**
-     * Display a paginated list of users
-     * 
-     * @param Request $request The HTTP request
-     * @return View The users list view
+     * Listado de usuarios
      */
     public function index(Request $request): View
     {
-
         $users = User::paginate(10);
 
         return view('showUsers', compact('users'))
@@ -30,25 +27,18 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new user
-     * 
-     * @return View The user registration form view
+     * Formulario de registro
      */
     public function create(): View
     {
-        $user = new User();
         return view('Users.registration_passenger');
     }
 
     /**
-     * Store a newly created user in the database
-     * 
-     * @param UserRequest $request The validated user request
-     * @return RedirectResponse Redirects back to registration with success message
+     * Guarda un usuario nuevo
      */
     public function store(UserRequest $request): RedirectResponse
     {
-    
         $data = $request->validated();
 
         $imagePath = null;
@@ -57,31 +47,28 @@ class UserController extends Controller
         }
 
         $user = User::create([
-            'cedula'           => $data['cedula'] ?? null,
-            'name'             => $data['name'] ?? null,
-            'lastname'         => $data['lastname'] ?? null,
-            'birthDate'        => $data['birthDate'] ?? null,
-            'email'            => $data['email'] ?? null,
-            'phoneNum'         => $data['phoneNum'] ?? null,
-            'password'         => bcrypt($data['password'] ?? null),
-            'image'            => $imagePath ?? null,
+            'cedula'           => $data['cedula'],
+            'name'             => $data['name'],
+            'lastname'         => $data['lastname'],
+            'birthDate'        => $data['birthDate'],
+            'email'            => $data['email'],
+            'phoneNum'         => $data['phoneNum'],
+            'password'         => bcrypt($data['password']),
+            'image'            => $imagePath,
             'state'            => 'pending',
             'userType'         => 'user',
             'token'            => Str::random(60),
             'expiration_token' => now()->addHours(1),
         ]);
+
         Mail::to($data['email'])->send(new SendEmail($user));
 
         return redirect()->route('register')
             ->with('success', 'Usuario registrado correctamente.');
-
     }
 
     /**
-     * Display the specified user
-     * 
-     * @param int $id The user ID
-     * @return View The user detail view
+     * Mostrar perfil de un usuario específico
      */
     public function show($id): View
     {
@@ -90,28 +77,19 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified user
-     * 
-     * @param string $cedula The user's cedula (ID number)
-     * @return View The user edit form view
+     * Formulario de edición de usuarios (admin)
      */
     public function edit($cedula): View
     {
         $user = User::where('cedula', $cedula)->firstOrFail();
         return view('Users.edit', compact('user'));
-
     }
 
     /**
-     * Update the specified user in the database
-     * 
-     * @param UserRequest $request The validated user request
-     * @param string $cedula The user's cedula (ID number)
-     * @return RedirectResponse Redirects to users list with success message
+     * Actualizar usuario (admin)
      */
     public function update(UserRequest $request, $cedula): RedirectResponse
     {
-
         $user = User::where('cedula', $cedula)->firstOrFail();
         $data = $request->validated();
 
@@ -123,14 +101,10 @@ class UserController extends Controller
 
         return Redirect::route('showUsers')
             ->with('success', 'User updated successfully');
-
     }
 
     /**
-     * Remove the specified user from the database
-     * 
-     * @param string $cedula The user's cedula (ID number)
-     * @return RedirectResponse Redirects to users list with success message
+     * Eliminar usuario
      */
     public function destroy($cedula): RedirectResponse
     {
@@ -139,6 +113,9 @@ class UserController extends Controller
             ->with('success', 'User deleted successfully');
     }
 
+    /**
+     * Activar usuario por correo
+     */
     public function activate($token)
     {
         $user = User::where('token', $token)->first();
@@ -148,10 +125,62 @@ class UserController extends Controller
                 'token' => null,
                 'expiration_token' => null,
             ]);
+
             return redirect()->route('login')
-                ->with('success', 'User activated successfully');
+                ->with('success', 'Cuenta activada correctamente');
         }
+
         return redirect()->route('login')
-            ->with('error', 'Invalid activation token');
+            ->with('error', 'Token inválido');
+    }
+
+    /**
+     * ============================
+     *     PERFIL DE USUARIO
+     * ============================
+     */
+
+    /**
+     * Mostrar perfil del usuario autenticado
+     */
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('Users.profile', compact('user'));
+    }
+
+    /**
+     * Actualizar perfil del usuario autenticado
+     */
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validación
+        $data = $request->validate([
+            'name'      => 'required|string|max:255',
+            'lastname'  => 'required|string|max:255',
+            'birthDate' => 'nullable|date',
+            'mail'      => 'required|email',
+            'phoneNum'  => 'required|string|max:20',
+            'image'     => 'nullable|image|max:2048',
+        ]);
+
+        // Si sube foto
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('users', 'public');
+            $user->image = $data['image'];
+        }
+
+        // Actualizar campos
+        $user->name      = $data['name'];
+        $user->lastname  = $data['lastname'];
+        $user->birthDate = $data['birthDate'] ?? $user->birthDate;
+        $user->email     = $data['mail'];
+        $user->phoneNum  = $data['phoneNum'];
+
+        $user->save();
+
+        return back()->with('success', 'Perfil actualizado correctamente');
     }
 }

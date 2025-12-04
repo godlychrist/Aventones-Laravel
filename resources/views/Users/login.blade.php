@@ -14,6 +14,7 @@
     
     {{-- CSS del login --}}
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/magic-link.css') }}">
 </head>
 
 <body>
@@ -49,7 +50,7 @@
 
                 <div class="form-group">
                     <label for="cedula" class="form-label">Cedula</label>
-                    <input id="cedula" name="cedula" type="text" class="form-input" placeholder="208560527" required />
+                    <input id="cedula" name="cedula" type="text" class="form-input" placeholder="12345678" required />
                 </div>
 
                 <div class="form-group">
@@ -65,6 +66,19 @@
                 <button type="submit" class="submit-button">
                     Sign in
                 </button>
+
+                {{-- BOTÓN PARA MAGIC LINK --}}
+                <div class="divider-text">
+                    <span>O</span>
+                </div>
+
+                <a href="{{ route('magic-link.request') }}" class="magic-link-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Enviarme link de Login
+                </a>
 
                 {{-- ENLACE A REGISTER COMO EN EL OTRO --}}
                 <div class="register-link">

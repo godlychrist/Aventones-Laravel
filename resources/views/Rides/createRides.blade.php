@@ -78,7 +78,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Asientos disponibles</label>
-                        <input type="number" name="space" value="{{ old('space') }}" class="form-control" placeholder="4" min="1" required>
+                        <input type="number" name="space" value="{{ old('space') }}" class="form-control" placeholder="1-4" min="1" max="4" required>
+                        <small class="text-muted">Máximo según capacidad del vehículo</small>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -92,7 +93,9 @@
                     <select name="vehicle_id" class="form-control" required>
                         <option value="">Seleccione un vehículo</option>
                         @foreach($vehicles as $vehicle)
-                            <option value="{{ $vehicle->plateNum }}">{{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plateNum }})</option>
+                            <option value="{{ $vehicle->plateNum }}" data-capacity="{{ $vehicle->capacity }}">
+                                {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plateNum }}) - Capacidad: {{ $vehicle->capacity }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -104,6 +107,7 @@
         </div>
     </div>
 
+    <script src="{{ asset('js/vehicle_capacity_validator.js') }}"></script>
     <script>
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;

@@ -57,16 +57,25 @@ body {
 .moon-icon {
     transition: all var(--transition-base);
 }
-
-.sun-icon {
-    color: var(--color-bg-primary);
-    display: block;
-}
-
+/* Íconos visibles siempre con contraste */
+.sun-icon,
 .moon-icon {
-    color: var(--color-bg-primary);
-    display: none;
+    width: 20px;
+    height: 20px;
+    stroke: white;         /* ✔ el icono será blanco siempre */
+    fill: none;
+    display: block;
+    position: absolute;
 }
+
+/* Modo claro: mostrar el sol */
+.sun-icon { opacity: 1; }
+.moon-icon { opacity: 0; }
+
+/* Modo oscuro: mostrar la luna */
+.dark-mode .sun-icon { opacity: 0; }
+.dark-mode .moon-icon { opacity: 1; }
+
 
 /* ===================================
    CONTAINER & LAYOUT

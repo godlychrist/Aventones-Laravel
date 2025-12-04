@@ -1,0 +1,77 @@
+/* Estilos para el botón de Magic Link */
+.divider-text {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: var(--color-border, #e5e7eb);
+}
+
+.divider-text::before {
+    left: 0;
+}
+
+.divider-text::after {
+    right: 0;
+}
+
+.divider-text span {
+    background: var(--color-bg-primary, white);
+    padding: 0 1rem;
+    color: var(--color-text-muted, #9ca3af);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.magic-link-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: var(--color-text-primary, #000);
+    border: 2px solid var(--color-border, #e5e7eb);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.magic-link-button:hover {
+    background: var(--color-bg-secondary, #f9fafb);
+    border-color: var(--color-text-primary, #000);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .magic-link-button {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #f9fafb;
+}
+
+.dark-mode .magic-link-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .divider-text::before,
+.dark-mode .divider-text::after {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .divider-text span {
+    background: var(--color-bg-primary, #0a0a0a);
+}

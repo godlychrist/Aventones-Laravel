@@ -18,7 +18,7 @@ class VehicleRequest extends FormRequest
             'brand'    => 'required|string|max:255',
             'model'    => 'required|string|max:255',
             'year'     => 'required|date',             // tu campo es DATE
-            'capacity' => 'required|integer|min:1',    // int(11)
+            'capacity' => 'required|integer|min:1|max:4',    // Máximo 4 pasajeros
             'image'    => 'nullable|image|max:2048',   // opcional
         ];
     }
