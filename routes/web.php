@@ -5,7 +5,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RidesController;
+use App\Http\Controllers\BookingsController;
 use Illuminate\Support\Facades\Route;
+
 
 /**
  * Redirection Routes
@@ -19,8 +21,14 @@ Route::get('/profile', function () {
 })->name('/profile')->middleware('auth');
 
 Route::get('/login', function () {
+
+    if (Auth::check()) {
+        return redirect()->route('/index'); 
+    }
+
     return view('Users.login');
 })->name('login');
+
 
 Route::get('/index', function () {
     return view('Users.index');
@@ -97,4 +105,25 @@ Route::middleware('auth')->group(function () { // Authenticated users only
     Route::put('/rides/{ride}', [RidesController::class, 'update'])->name('rides.update');
 
     Route::delete('/rides/{ride}', [RidesController::class, 'destroy'])->name('rides.destroy');
+});
+
+/**
+ * CRUD Bookings
+ */
+Route::middleware('auth')->group(function () { // Authenticated users only
+    Route::get('/bookings', [BookingsController::class, 'index'])->name('bookings');
+
+    Route::get('/bookings/create/{ride_id}', [BookingsController::class, 'create'])->name('booking.create');
+
+    Route::post('/bookings', [BookingsController::class, 'store'])->name('bookings.store');
+
+    Route::get('/bookings/{id}', [BookingsController::class, 'show'])->name('bookings.show');
+
+    Route::get('/bookings/{id}/edit', [BookingsController::class, 'edit'])->name('bookings.edit');
+
+    Route::put('/bookings/{id}', [BookingsController::class, 'update'])->name('bookings.update');
+
+    Route::put('/bookings/{id}/status', [BookingsController::class, 'updateStatus'])->name('bookings.status');
+
+    Route::delete('/bookings/{id}', [BookingsController::class, 'destroy'])->name('bookings.destroy');
 });
