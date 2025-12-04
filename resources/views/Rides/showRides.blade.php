@@ -103,6 +103,16 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* HEADER & NAVBAR */
+        .main-header { padding: var(--spacing-md) 0; }
+        .header-box { background: var(--color-bg-primary); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: var(--spacing-md); transition: all var(--transition-base); margin-bottom: 2rem; }
+        .nav-bar { display: flex; gap: var(--spacing-md); }
+        .nav-bar a { color: var(--color-text-secondary); text-decoration: none; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); transition: all var(--transition-base); position: relative; padding: 0.5rem 1rem; }
+        .nav-bar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-primary); transition: width var(--transition-base); }
+        .nav-bar a:hover, .nav-bar a.active { color: var(--color-text-primary); }
+        .nav-bar a:hover::after, .nav-bar a.active::after { width: 100%; }
+        .dark-mode .header-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
     </style>
 </head>
 
@@ -127,6 +137,22 @@
     </button>
 
     <div class="container py-5">
+        <header class="main-header text-center my-3">
+            <div class="header-box mt-3">
+                <div class="header-content d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                    <nav class="nav-bar d-flex flex-column flex-sm-row align-items-center gap-3">
+                        <a href="{{ route('home') }}" class="hover-grow fw-bold">Panel</a>
+                        <a href="{{ route('rides') }}" class="hover-grow active">Rides</a>
+                        <a href="{{ route('vehicles') }}" class="hover-grow">Vehículos</a>
+                        <a href="{{ route('bookings') }}" class="hover-grow">Reservas</a>
+                    </nav>
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{{ route('/profile') }}" class="btn btn-sm btn-outline-secondary hover-grow">Perfil</a>
+                        <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-secondary hover-grow">Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </header>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="text-center mb-0">Mis Rides</h2>
             <a href="{{ route('ride.create') }}" class="btn btn-success">
