@@ -1,5 +1,5 @@
 
-// ...existing code...
+
 @php
     $user = Auth::user();
     $user = $user?->name ?? 'Invitado';
@@ -147,7 +147,7 @@
                                     <td>₡{{ number_format($ride->space_cost, 0) }}</td>
                                     <td>{{ $ride->vehicle_id }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-success">Reservar</a>
+                                        <a href="{{ route('booking.create', $ride->id) }}" class="btn btn-sm btn-success">Reservar</a>
                                     </td>
                                 </tr>
                             @empty
@@ -194,4 +194,3 @@
 </body>
 
 </html>
-// ...existing code...
