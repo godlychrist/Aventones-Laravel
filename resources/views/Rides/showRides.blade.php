@@ -12,108 +12,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/ride_form.css') }}">
-    
-    <style>
-        .ride-card {
-            background: var(--color-bg-primary);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            padding: var(--spacing-lg);
-            margin-bottom: var(--spacing-md);
-            transition: all var(--transition-base);
-            border: 1px solid var(--color-border);
-        }
-        
-        .ride-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .ride-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .ride-title {
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            color: var(--color-text-primary);
-            margin: 0;
-        }
-        
-        .ride-status {
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: var(--font-size-xs);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .ride-status.active {
-            background: #10b981;
-            color: white;
-        }
-        
-        .ride-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .info-item {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .info-label {
-            font-size: var(--font-size-xs);
-            color: var(--color-text-secondary);
-            margin-bottom: 0.25rem;
-        }
-        
-        .info-value {
-            font-size: var(--font-size-sm);
-            color: var(--color-text-primary);
-            font-weight: var(--font-weight-medium);
-        }
-        
-        .ride-actions {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: var(--spacing-xl);
-            color: var(--color-text-secondary);
-        }
-        
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .dark-mode .ride-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    <link rel="stylesheet" href="{{ asset('css/rides_list.css') }}">
 
-        /* HEADER & NAVBAR */
-        .main-header { padding: var(--spacing-md) 0; }
-        .header-box { background: var(--color-bg-primary); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: var(--spacing-md); transition: all var(--transition-base); margin-bottom: 2rem; }
-        .nav-bar { display: flex; gap: var(--spacing-md); }
-        .nav-bar a { color: var(--color-text-secondary); text-decoration: none; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); transition: all var(--transition-base); position: relative; padding: 0.5rem 1rem; }
-        .nav-bar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-primary); transition: width var(--transition-base); }
-        .nav-bar a:hover, .nav-bar a.active { color: var(--color-text-primary); }
-        .nav-bar a:hover::after, .nav-bar a.active::after { width: 100%; }
-        .dark-mode .header-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
-    </style>
 </head>
 
 <body>
