@@ -1,0 +1,130 @@
+/* ===================================
+   IMPORT GLOBAL VARIABLES
+   =================================== */
+@import url('variables.css');
+
+/* ===================================
+   ADMIN-SPECIFIC BUTTONS
+   =================================== */
+.btn-enable {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-enable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-disable {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.btn-disable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+/* ===================================
+   ADMIN STATUS BADGES
+   =================================== */
+.status-active {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.status-inactive {
+    background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+}
+
+/* ===================================
+   HEADER & NAVBAR
+   =================================== */
+.main-header {
+    padding: var(--spacing-md) 0;
+}
+
+.header-box {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-md);
+    transition: all var(--transition-base);
+    margin-bottom: 2rem;
+}
+
+.nav-bar {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.nav-bar a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-base);
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.nav-bar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width var(--transition-base);
+}
+
+.nav-bar a:hover,
+.nav-bar a.active {
+    color: var(--color-text-primary);
+}
+
+.nav-bar a:hover::after,
+.nav-bar a.active::after {
+    width: 100%;
+}
+
+/* ===================================
+   DARK MODE - ADMIN SPECIFIC
+   =================================== */
+.dark-mode .header-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .btn-enable {
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.5);
+}
+
+.dark-mode .btn-enable:hover {
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.6);
+}
+
+.dark-mode .btn-disable {
+    box-shadow: 0 2px 12px rgba(239, 68, 68, 0.5);
+}
+
+.dark-mode .btn-disable:hover {
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.6);
+}
+
+.dark-mode .status-active {
+    box-shadow: 0 2px 12px rgba(16, 185, 129, 0.5);
+}
+
+.dark-mode .status-inactive {
+    box-shadow: 0 2px 12px rgba(107, 114, 128, 0.5);
+}
