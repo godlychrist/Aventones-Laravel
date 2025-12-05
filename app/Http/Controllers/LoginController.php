@@ -40,7 +40,7 @@ class LoginController extends Controller
             }
 
             $request->session()->regenerate();
-            return redirect()->route('index');
+            return redirect()->route('/index');
         }
 
         return back()->withErrors([
@@ -61,7 +61,7 @@ class LoginController extends Controller
      */
     public function showMagicLinkForm(): View
     {
-        return view('Users.magic-link-request');
+        return view('Users.MagicLinkRequest');
     }
 
     /**
