@@ -34,6 +34,11 @@ class UserController extends Controller
         return view('Users.RegistrationPassenger');
     }
 
+    public function createAdmin(): View
+    {
+        return view('Admin.CreateAdmins');
+    }
+
     /**
      * Guarda un usuario nuevo
      */
@@ -42,6 +47,8 @@ class UserController extends Controller
         $data = $request->validated();
 
         $userType = Auth::check() && Auth::user()->userType === 'admin' ? 'admin' : 'user';
+
+        $state = Auth::check() && Auth::user()->userType === 'admin' ? 'active' : 'pending'; 
 
         $imagePath = null;
         if ($request->hasFile('image')) {
@@ -57,15 +64,21 @@ class UserController extends Controller
             'phoneNum'         => $data['phoneNum'],
             'password'         => bcrypt($data['password']),
             'image'            => $imagePath,
-            'state'            => 'pending',
+            'state'            => $state,
             'userType'         => $userType,
             'token'            => Str::random(60),
             'expiration_token' => now()->addHours(1),
         ]);
 
-        Mail::to($data['email'])->send(new SendEmail($user));
+        if($userType === 'admin') {
+            return redirect()->route('showUsers')
+                ->with('success', 'Usuario registrado correctamente.');
+        }
+        else {
+            Mail::to($data['email'])->send(new SendEmail($user));
+        }
 
-        return redirect()->route('register')
+        return redirect()->route('login')
             ->with('success', 'Usuario registrado correctamente.');
     }
 
