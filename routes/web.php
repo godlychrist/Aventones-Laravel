@@ -45,7 +45,7 @@ Route::post('register', [UserController::class, 'store'])->name('saveUser');
 
 Route::middleware('auth')->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('showUsers');
-
+    Route::get('registerAdmin', [UserController::class, 'createAdmin'])->name('registerAdmin');
     Route::get('users/{cedula}/edit', [UserController::class, 'edit'])->name('editUser');
     Route::put('users/{cedula}/state', [UserController::class, 'update'])->name('updateUser');
 
