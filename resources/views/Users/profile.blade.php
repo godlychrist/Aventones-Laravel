@@ -136,7 +136,7 @@
                             Guardar cambios
                         </button>
 
-                        <a href="{{ route('index') }}" class="btn btn-outline w-100">
+                        <a href="{{ route('/index') }}" class="btn btn-outline w-100">
                             ⬅ Volver al panel
                         </a>
                     </div>
