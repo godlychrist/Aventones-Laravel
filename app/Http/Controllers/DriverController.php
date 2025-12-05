@@ -20,13 +20,13 @@ class DriverController extends Controller
     {
         $drivers = Driver::where('userType', 'driver')->paginate(10);
 
-        return view('Drivers.showDrivers', compact('drivers'))
+        return view('Drivers.ShowDrivers', compact('drivers'))
             ->with('i', ($request->input('page', 1) - 1) * $drivers->perPage());
     }
 
     public function create(): View
     {
-        return view('Users.registration_driver');
+        return view('Users.RegistrationDriver');
     }
 
     public function store(DriverRequest $request): RedirectResponse
