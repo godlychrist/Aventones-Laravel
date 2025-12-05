@@ -23,7 +23,7 @@ class VehicleController extends Controller
 
         $vehicles = Vehicle::where('user_id', $userCedula)->get();
 
-        return view('Drivers.showVehicles', compact('vehicles'));
+        return view('Drivers.ShowVehicles', compact('vehicles'));
     }
 
     /**
@@ -33,7 +33,7 @@ class VehicleController extends Controller
      */
     public function create(): View
     {
-        return view('Drivers.registerVehicles');
+        return view('Drivers.RegisterVehicles');
     }
 
     /**
@@ -69,7 +69,7 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle): View
     {
-        return view('Drivers.editVehicles', compact('vehicle'));
+        return view('Drivers.EditVehicles', compact('vehicle'));
     }
 
     /**
