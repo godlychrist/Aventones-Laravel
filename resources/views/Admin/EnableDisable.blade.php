@@ -76,7 +76,16 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="card-title mb-0">Gestión de Usuarios</h2>
-                    <span class="badge-id">Total: {{ $users->count() }}</span>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="badge-id">Total: {{ $users->count() }}</span>
+                        <a href="{{ route('registerAdmin') }}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Nuevo Admin
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -91,6 +100,7 @@
                                 <th scope="col">Apellido</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Estado</th>
+                                <th scope="col">Tipo</th>
                                 <th scope="col" class="text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -139,6 +149,15 @@
                                                 Inactivo
                                             </span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <div class="user-info">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+
+                                            </svg>
+                                            {{ $user->userType }}
+                                        </div>
                                     </td>
                                     <td>
                                         <div class="action-buttons">
