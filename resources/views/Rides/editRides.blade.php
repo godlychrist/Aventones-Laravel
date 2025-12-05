@@ -15,17 +15,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/ride_form.css') }}">
-    <style>
-        /* HEADER & NAVBAR */
-        .main-header { padding: var(--spacing-md) 0; }
-        .header-box { background: var(--color-bg-primary); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: var(--spacing-md); transition: all var(--transition-base); margin-bottom: 2rem; }
-        .nav-bar { display: flex; gap: var(--spacing-md); }
-        .nav-bar a { color: var(--color-text-secondary); text-decoration: none; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); transition: all var(--transition-base); position: relative; padding: 0.5rem 1rem; }
-        .nav-bar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-primary); transition: width var(--transition-base); }
-        .nav-bar a:hover, .nav-bar a.active { color: var(--color-text-primary); }
-        .nav-bar a:hover::after, .nav-bar a.active::after { width: 100%; }
-        .dark-mode .header-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/shared_header.css') }}">
+
 </head>
 
 <body>
