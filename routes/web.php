@@ -29,13 +29,13 @@ Route::get('/login', function () {
         return redirect()->route('/index'); 
     }
 
-    return view('Users.login');
+    return view('Users.Login');
 })->name('login');
 
 
 Route::get('/index', function () {
-    return view('Users.index');
-})->name('index')->middleware('auth');
+    return view('Users.Index');
+})->name('/index')->middleware('auth');
 
 /**
  * CRUD Users
@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('showUsers');
 
     Route::get('users/{cedula}/edit', [UserController::class, 'edit'])->name('editUser');
-    Route::put('users/{cedula}', [UserController::class, 'update'])->name('updateUser');
+    Route::put('users/{cedula}/state', [UserController::class, 'update'])->name('updateUser');
 
     Route::delete('users/{cedula}', [UserController::class, 'destroy'])->name('deleteUser');
 });
