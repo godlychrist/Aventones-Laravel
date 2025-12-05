@@ -25,7 +25,7 @@ class BookingsController extends Controller
     {
         $bookings = Bookings::paginate(10);
 
-        return view('Bookings.showBookings', compact('bookings'))
+        return view('Bookings.ShowBookings', compact('bookings'))
             ->with('i', ($request->input('page', 1) - 1) * $bookings->perPage());
     }
 
@@ -52,7 +52,7 @@ class BookingsController extends Controller
             $booking->status = 'pending';
         }
         
-        return view('Bookings.registerBookings', compact('booking', 'ride'));
+        return view('Bookings.RegisterBookings', compact('booking', 'ride'));
     }
 
     /**
