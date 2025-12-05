@@ -20,7 +20,7 @@ class RidesController extends Controller
     {
         $rides = Ride::where('user_id', Auth::user()->cedula)->paginate(10);
 
-        return view('Rides.showRides', compact('rides'))
+        return view('Rides.ShowRides', compact('rides'))
             ->with('i', ($request->input('page', 1) - 1) * $rides->perPage());
     }
 
@@ -55,7 +55,7 @@ class RidesController extends Controller
         $destinations = Ride::where('status', 'active')
             ->select('destination')->distinct()->orderBy('destination')->pluck('destination');
 
-        return view('welcome', [
+        return view('Welcome', [
             'rides'               => $rides,
             'origins'             => $origins,
             'destinations'        => $destinations,
@@ -72,7 +72,7 @@ class RidesController extends Controller
     {
         $user     = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->cedula)->get();
-        return view('Rides/createRides', compact('vehicles', 'user'));
+        return view('Rides/CreateRides', compact('vehicles', 'user'));
     }
 
     /**
@@ -111,7 +111,7 @@ class RidesController extends Controller
         $user     = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->cedula)->get();
 
-        return view('Rides.editRides', compact('ride', 'vehicles', 'user'));
+        return view('Rides.EditRides', compact('ride', 'vehicles', 'user'));
     }
 
     public function update(RideRequest $request, $id): RedirectResponse
