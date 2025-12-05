@@ -17,27 +17,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/bookings_list.css') }}">
-    <style>
-        .btn-cancel {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: white;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
-        }
-        .btn-cancel:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-        }
+    <link rel="stylesheet" href="{{ asset('css/bookings_extras.css') }}">
 
-        /* HEADER & NAVBAR */
-        .main-header { padding: var(--spacing-md) 0; }
-        .header-box { background: var(--color-bg-primary); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: var(--spacing-md); transition: all var(--transition-base); margin-bottom: 2rem; }
-        .nav-bar { display: flex; gap: var(--spacing-md); }
-        .nav-bar a { color: var(--color-text-secondary); text-decoration: none; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); transition: all var(--transition-base); position: relative; padding: 0.5rem 1rem; }
-        .nav-bar a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-primary); transition: width var(--transition-base); }
-        .nav-bar a:hover, .nav-bar a.active { color: var(--color-text-primary); }
-        .nav-bar a:hover::after, .nav-bar a.active::after { width: 100%; }
-        .dark-mode .header-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
-    </style>
 </head>
 
 <body>
@@ -71,7 +52,7 @@
                         <a href="{{ route('bookings') }}" class="hover-grow active">Reservas</a>
                     </nav>
                     <div class="d-flex align-items-center gap-3">
-                        <a href="{{ route('/profile') }}" class="btn btn-sm btn-outline-secondary hover-grow">Perfil</a>
+                        <a href="{{ route('profile') }}" class="btn btn-sm btn-outline-secondary hover-grow">Perfil</a>
                         <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-secondary hover-grow">Cerrar Sesión</a>
                     </div>
                 </div>
