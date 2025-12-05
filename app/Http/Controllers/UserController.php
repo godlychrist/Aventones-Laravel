@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $users = User::paginate(10);
 
-        return view('showUsers', compact('users'))
+        return view('Admin.EnableDisable', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * $users->perPage());
     }
 
@@ -31,7 +31,7 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('Users.registration_passenger');
+        return view('Users.RegistrationPassenger');
     }
 
     /**
@@ -40,6 +40,8 @@ class UserController extends Controller
     public function store(UserRequest $request): RedirectResponse
     {
         $data = $request->validated();
+
+        $userType = Auth::check() && Auth::user()->userType === 'admin' ? 'admin' : 'user';
 
         $imagePath = null;
         if ($request->hasFile('image')) {
@@ -56,7 +58,7 @@ class UserController extends Controller
             'password'         => bcrypt($data['password']),
             'image'            => $imagePath,
             'state'            => 'pending',
-            'userType'         => 'user',
+            'userType'         => $userType,
             'token'            => Str::random(60),
             'expiration_token' => now()->addHours(1),
         ]);
@@ -73,7 +75,7 @@ class UserController extends Controller
     public function show($id): View
     {
         $user = User::find($id);
-        return view('Users.profile', compact('user'));
+        return view('Users.Profile', compact('user'));
     }
 
     /**
@@ -88,19 +90,15 @@ class UserController extends Controller
     /**
      * Actualizar usuario (admin)
      */
-    public function update(UserRequest $request, $cedula): RedirectResponse
+    public function update($cedula): RedirectResponse
     {
         $user = User::where('cedula', $cedula)->firstOrFail();
-        $data = $request->validated();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('users', 'public');
-        }
-
-        $user->update($data);
+        $user->update([
+            'state' => $user->state === 'active' ? 'inactive' : 'active',
+        ]);
 
         return Redirect::route('showUsers')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Usuario actualizado correctamente');
     }
 
     /**
@@ -109,7 +107,7 @@ class UserController extends Controller
     public function destroy($cedula): RedirectResponse
     {
         User::where('cedula', $cedula)->delete();
-        return Redirect::route('showUsers')
+        return Redirect::route('Admin.Enable-Disable')
             ->with('success', 'User deleted successfully');
     }
 
@@ -146,7 +144,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('Users.profile', compact('user'));
+        return view('Users.Profile', compact('user'));
     }
 
     /**
