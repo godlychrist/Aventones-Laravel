@@ -53,16 +53,35 @@
               class="formulario-login text-start w-100 mt-3" style="max-width: 560px;">
             @csrf
 
+            {{-- MUESTRA ERRORES DE VALIDACIÓN --}}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+                    <ul class="mb-0 mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             {{-- Nombre / Apellidos --}}
             <div class="row g-3">
                 <div class="col-12 col-md-6">
                     <label class="form-label fw-bold text-dark">Nombre</label>
-                    <input type="text" name="name" class="form-control" placeholder="Juan" required>
+                    <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" placeholder="Juan" required>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label class="form-label fw-bold text-dark">Apellidos</label>
-                    <input type="text" name="lastname" class="form-control" placeholder="Pérez Solano" required>
+                    <input type="text" name="lastname" value="{{ old('lastname') }}" class="form-control @error('lastname') is-invalid @enderror" placeholder="Pérez Solano" required>
+                    @error('lastname')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
@@ -70,12 +89,18 @@
             <div class="row g-3 mt-1">
                 <div class="col-12 col-md-6">
                     <label class="form-label fw-bold text-dark">Cédula</label>
-                    <input type="text" name="cedula" class="form-control" placeholder="1-2345-6789" required>
+                    <input type="text" name="cedula" value="{{ old('cedula') }}" class="form-control @error('cedula') is-invalid @enderror" placeholder="1-2345-6789" required>
+                    @error('cedula')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label class="form-label fw-bold text-dark">Fecha de Nacimiento</label>
-                    <input type="date" name="birthDate" class="form-control" required>
+                    <input type="date" name="birthDate" value="{{ old('birthDate') }}" class="form-control @error('birthDate') is-invalid @enderror" required>
+                    @error('birthDate')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
@@ -83,19 +108,28 @@
             <div class="row g-3 mt-1">
                 <div class="col-12 col-md-6">
                     <label class="form-label fw-bold text-dark">Correo</label>
-                    <input type="email" name="email" class="form-control" placeholder="tu@correo.com" required>
+                    <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="tu@correo.com" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="col-12 col-md-6">
                     <label class="form-label fw-bold text-dark">Teléfono</label>
-                    <input type="tel" name="phoneNum" class="form-control" placeholder="8888-8888" required>
+                    <input type="tel" name="phoneNum" value="{{ old('phoneNum') }}" class="form-control @error('phoneNum') is-invalid @enderror" placeholder="8888-8888" required>
+                    @error('phoneNum')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
 
             {{-- Foto --}}
             <div class="mt-3">
                 <label class="form-label fw-bold text-dark">Fotografía Personal</label>
-                <input type="file" name="image" class="form-control" accept="image/*">
+                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             {{-- Password --}}
@@ -103,11 +137,17 @@
         <div class="row g-3 mt-1">
           <div class="col-12 col-md-6">
             <label for="password" class="form-label fw-bold text-dark">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="********" required>
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="********" required>
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
           </div>
           <div class="col-12 col-md-6">
             <label for="password_confirm" class="form-label fw-bold text-dark">Repeat Password</label>
-            <input type="password" id="password_confirm" name="password_confirm" class="form-control" placeholder="********" required>
+            <input type="password" id="password_confirm" name="password_confirm" class="form-control @error('password_confirm') is-invalid @enderror" placeholder="********" required>
+            @error('password_confirm')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
           </div>
         </div>
             {{-- Botón --}}
@@ -134,6 +174,7 @@
     <p class="footer-copy">© Aventones.com</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 const themeToggle = document.getElementById('themeToggle');
 const html = document.documentElement;
