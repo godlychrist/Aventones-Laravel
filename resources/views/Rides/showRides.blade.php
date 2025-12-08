@@ -50,7 +50,7 @@
                         <a href="{{ route('bookings') }}" class="hover-grow">Reservas</a>
                     </nav>
                     <div class="d-flex align-items-center gap-3">
-                        <a href="{{ route('/profile') }}" class="btn btn-sm btn-outline-secondary hover-grow">Perfil</a>
+                        <a href="{{ route('profile') }}" class="btn btn-sm btn-outline-secondary hover-grow">Perfil</a>
                         <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-secondary hover-grow">Cerrar Sesión</a>
                     </div>
                 </div>

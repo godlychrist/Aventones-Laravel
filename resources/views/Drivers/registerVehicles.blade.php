@@ -43,6 +43,19 @@
         <h2 class="text-center mb-4">Registrar Vehículo</h2>
 
         <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+            {{-- Mostrar errores de validación --}}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+                    <ul class="mb-0 mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <form action="{{ route('vehicles.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -50,38 +63,59 @@
 
                 <div class="mb-3">
                     <label class="form-label">Número de Placa</label>
-                    <input type="text" name="plateNum" class="form-control" placeholder="ABC-123" required>
+                    <input type="text" name="plateNum" value="{{ old('plateNum') }}" class="form-control @error('plateNum') is-invalid @enderror" placeholder="ABC-123" required>
+                    @error('plateNum')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Color</label>
-                    <input type="text" name="color" class="form-control" placeholder="Rojo" required>
+                    <input type="text" name="color" value="{{ old('color') }}" class="form-control @error('color') is-invalid @enderror" placeholder="Rojo" required>
+                    @error('color')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Marca</label>
-                    <input type="text" name="brand" class="form-control" placeholder="Toyota" required>
+                    <input type="text" name="brand" value="{{ old('brand') }}" class="form-control @error('brand') is-invalid @enderror" placeholder="Toyota" required>
+                    @error('brand')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Modelo</label>
-                    <input type="text" name="model" class="form-control" placeholder="Corolla" required>
+                    <input type="text" name="model" value="{{ old('model') }}" class="form-control @error('model') is-invalid @enderror" placeholder="Corolla" required>
+                    @error('model')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Año</label>
-                    <input type="date" name="year" class="form-control" required>
+                    <input type="date" name="year" value="{{ old('year') }}" class="form-control @error('year') is-invalid @enderror" required>
+                    @error('year')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Capacidad de pasajeros</label>
-                    <input type="number" name="capacity" class="form-control" min="1" max="4" placeholder="1-4" required>
+                    <input type="number" name="capacity" value="{{ old('capacity') }}" class="form-control @error('capacity') is-invalid @enderror" min="1" max="4" placeholder="1-4" required>
                     <small class="text-muted">Máximo 4 pasajeros</small>
+                    @error('capacity')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Foto del vehículo (opcional)</label>
-                    <input type="file" name="image" class="form-control">
+                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
+                    @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button class="btn btn-success w-100">Guardar Vehículo</button>
@@ -91,6 +125,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/vehicle_capacity_validator.js') }}"></script>
     <script>
     const themeToggle = document.getElementById('themeToggle');
