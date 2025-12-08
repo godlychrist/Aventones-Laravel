@@ -72,7 +72,7 @@ class RidesController extends Controller
     {
         $user     = Auth::user();
         $vehicles = Vehicle::where('user_id', $user->cedula)->get();
-        return view('Rides/CreateRides', compact('vehicles', 'user'));
+        return view('Rides.CreateRides', compact('vehicles', 'user'));
     }
 
     /**
@@ -102,7 +102,7 @@ class RidesController extends Controller
     public function show($id): View
     {
         $ride = Ride::find($id);
-        return view('Rides.showRides', compact('ride'));
+        return view('Rides.ShowRides', compact('ride'));
     }
 
     public function edit($id): View
