@@ -9,7 +9,8 @@ class Bookings extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    public $timestamps = false;
+    // Enable only created_at timestamp
+    const UPDATED_AT = null;
 
     // 👇 MUY IMPORTANTE: este modelo usa la tabla BOOKINGS
     protected $table = 'bookings';
@@ -23,6 +24,7 @@ class Bookings extends Authenticatable
         'ride_id',
         'date',
         'driver_id',
+        'created_at',
     ];
 
     protected $hidden = [
@@ -35,6 +37,31 @@ class Bookings extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'created_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Relación con el chofer (driver)
+     */
+    public function driver()
+    {
+        return $this->belongsTo(User::class, 'driver_id', 'cedula');
+    }
+
+    /**
+     * Relación con el pasajero (user)
+     */
+    public function passenger()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'cedula');
+    }
+
+    /**
+     * Relación con el viaje (ride)
+     */
+    public function ride()
+    {
+        return $this->belongsTo(Ride::class, 'ride_id', 'id');
     }
 }
