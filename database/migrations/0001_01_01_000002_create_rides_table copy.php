@@ -64,6 +64,8 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
+            $table->timestamp('created_at')->nullable();
+
         });
 
     }
