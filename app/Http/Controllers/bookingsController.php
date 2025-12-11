@@ -71,6 +71,7 @@ class BookingsController extends Controller
             'ride_id' => $data['ride_id'],
             'date' => $data['date'],
             'driver_id' => $data['driver_id'],
+            'created_at' => now(), // ← Agregar timestamp para el sistema de notificaciones
         ]);
 
         $ride = Ride::findOrFail($data['ride_id']);
