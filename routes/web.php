@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/login', function () {
 
     if (Auth::check()) {
-        return redirect()->route('/index'); 
+        return redirect()->route('index'); 
     }
 
     return view('Users.Login');
@@ -35,7 +35,7 @@ Route::get('/login', function () {
 
 Route::get('/index', function () {
     return view('Users.Index');
-})->name('/index')->middleware('auth');
+})->name('index')->middleware('auth');
 
 /**
  * CRUD Users

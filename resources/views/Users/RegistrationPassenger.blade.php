@@ -50,70 +50,99 @@
 
     {{-- MUESTRA ERRORES DE VALIDACIÓN --}}
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul class="mb-0">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+            <ul class="mb-0 mt-2">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     <div class="row g-3">
         <div class="col-12 col-md-6">
             <label for="name" class="form-label fw-bold text-dark">Nombre</label>
-            <input type="text" id="name" name="name" class="form-control"
+            <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror"
                    value="{{ old('name') }}" placeholder="Juan" required>
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-12 col-md-6">
             <label for="lastname" class="form-label fw-bold text-dark">Apellidos</label>
-            <input type="text" id="lastname" name="lastname" class="form-control"
+            <input type="text" id="lastname" name="lastname" class="form-control @error('lastname') is-invalid @enderror"
                    value="{{ old('lastname') }}" placeholder="Pérez Solano" required>
+            @error('lastname')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
     </div>
 
     <div class="row g-3 mt-1">
         <div class="col-12 col-md-6">
             <label for="cedula" class="form-label fw-bold text-dark">Cédula</label>
-            <input type="text" id="cedula" name="cedula" class="form-control"
+            <input type="text" id="cedula" name="cedula" class="form-control @error('cedula') is-invalid @enderror"
                    value="{{ old('cedula') }}" placeholder="1-2345-6789" required>
+            @error('cedula')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-12 col-md-6">
             <label for="birthDate" class="form-label fw-bold text-dark">Fecha de Nacimiento</label>
-            <input type="date" id="birthDate" name="birthDate" class="form-control"
+            <input type="date" id="birthDate" name="birthDate" class="form-control @error('birthDate') is-invalid @enderror"
                    value="{{ old('birthDate') }}" required>
+            @error('birthDate')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
     </div>
 
     <div class="row g-3 mt-1">
         <div class="col-12 col-md-6">
             <label for="email" class="form-label fw-bold text-dark">Correo</label>
-            <input type="email" id="email" name="email" class="form-control"
+            <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror"
                    value="{{ old('email') }}" placeholder="tu@correo.com" required>
+            @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="col-12 col-md-6">
             <label for="phoneNum" class="form-label fw-bold text-dark">Teléfono</label>
-            <input type="tel" id="phoneNum" name="phoneNum" class="form-control"
+            <input type="tel" id="phoneNum" name="phoneNum" class="form-control @error('phoneNum') is-invalid @enderror"
                    value="{{ old('phoneNum') }}" placeholder="8888-8888" required>
+            @error('phoneNum')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
     </div>
 
     <div class="mt-3">
         <label for="image" class="form-label fw-bold text-dark">Fotografía Personal</label>
-        <input type="file" id="image" name="image" class="form-control" accept="image/*">
+        <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
+        @error('image')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
     </div>
 
     <div class="row g-3 mt-1">
         <div class="col-12 col-md-6">
             <label for="password" class="form-label fw-bold text-dark">Password</label>
-            <input type="password" id="password" name="password" class="form-control"
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror"
                    placeholder="********" required>
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="col-12 col-md-6">
             <label for="password_confirmation" class="form-label fw-bold text-dark">Confirmar Password</label>
             <input type="password" id="password_confirmation" name="password_confirmation"
-                   class="form-control" placeholder="********" required>
+                   class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="********" required>
+            @error('password_confirmation')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         
     </div>
@@ -146,6 +175,7 @@
     <p class="footer-copy">© Aventones.com</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
   const themeToggle = document.getElementById('themeToggle');
   const html = document.documentElement;

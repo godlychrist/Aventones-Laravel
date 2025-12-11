@@ -43,6 +43,19 @@
         <h2 class="text-center mb-4">Crear Nuevo Ride</h2>
 
         <div class="card shadow p-4 mx-auto" style="max-width: 600px;">
+            {{-- Mostrar errores de validación --}}
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> Por favor corrija los siguientes errores:
+                    <ul class="mb-0 mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <form action="{{ route('rides.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="user_id" value="{{ $user->cedula }}">
@@ -50,54 +63,78 @@
                 
                 <div class="mb-3">
                     <label class="form-label">Nombre del Ride</label>
-                    <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Viaje a la universidad" required>
+                    <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" placeholder="Viaje a la universidad" required>
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Origen</label>
-                    <input type="text" name="origin" value="{{ old('origin') }}" class="form-control" placeholder="San José" required>
+                    <input type="text" name="origin" value="{{ old('origin') }}" class="form-control @error('origin') is-invalid @enderror" placeholder="San José" required>
+                    @error('origin')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Destino</label>
-                    <input type="text" name="destination" value="{{ old('destination') }}" class="form-control" placeholder="Heredia" required>
+                    <input type="text" name="destination" value="{{ old('destination') }}" class="form-control @error('destination') is-invalid @enderror" placeholder="Heredia" required>
+                    @error('destination')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Fecha</label>
-                        <input type="date" name="date" value="{{ old('date') }}" class="form-control" required>
+                        <input type="date" name="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror" required>
+                        @error('date')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Hora</label>
-                        <input type="time" name="time" value="{{ old('time') }}" class="form-control" required>
+                        <input type="time" name="time" value="{{ old('time') }}" class="form-control @error('time') is-invalid @enderror" required>
+                        @error('time')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Asientos disponibles</label>
-                        <input type="number" name="space" value="{{ old('space') }}" class="form-control" placeholder="1-4" min="1" max="4" required>
+                        <input type="number" name="space" value="{{ old('space') }}" class="form-control @error('space') is-invalid @enderror" placeholder="1-4" min="1" max="4" required>
                         <small class="text-muted">Máximo según capacidad del vehículo</small>
+                        @error('space')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Precio por asiento</label>
-                        <input type="number" name="space_cost" value="{{ old('space_cost') }}" class="form-control" placeholder="1000" min="0" required>
+                        <input type="number" name="space_cost" value="{{ old('space_cost') }}" class="form-control @error('space_cost') is-invalid @enderror" placeholder="1000" min="0" required>
+                        @error('space_cost')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Vehículo</label>
-                    <select name="vehicle_id" class="form-control" required>
+                    <select name="vehicle_id" class="form-control @error('vehicle_id') is-invalid @enderror" required>
                         <option value="">Seleccione un vehículo</option>
                         @foreach($vehicles as $vehicle)
-                            <option value="{{ $vehicle->plateNum }}" data-capacity="{{ $vehicle->capacity }}">
+                            <option value="{{ $vehicle->plateNum }}" data-capacity="{{ $vehicle->capacity }}" {{ old('vehicle_id') == $vehicle->plateNum ? 'selected' : '' }}>
                                 {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->plateNum }}) - Capacidad: {{ $vehicle->capacity }}
                             </option>
                         @endforeach
                     </select>
+                    @error('vehicle_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-success w-100">Crear Viaje</button>
@@ -107,6 +144,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/vehicle_capacity_validator.js') }}"></script>
     <script>
     const themeToggle = document.getElementById('themeToggle');
