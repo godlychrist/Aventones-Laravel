@@ -23,7 +23,13 @@ class BookingsController extends Controller
      */
     public function index(Request $request): View
     {
-        $bookings = Bookings::paginate(10);
+        $user = Auth::user();
+        
+        // Show bookings where user is either the passenger or the driver
+        $bookings = Bookings::where('user_id', $user->cedula)
+                            ->orWhere('driver_id', $user->cedula)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10);
 
         return view('Bookings.ShowBookings', compact('bookings'))
             ->with('i', ($request->input('page', 1) - 1) * $bookings->perPage());
@@ -152,6 +158,12 @@ class BookingsController extends Controller
         
         if (in_array($status, ['confirmed', 'rejected', 'cancelled'])) {
             $booking->update(['status' => $status]);
+            
+            // If booking is cancelled or rejected, restore the ride to 'active' status
+            if (in_array($status, ['cancelled', 'rejected'])) {
+                $ride = Ride::findOrFail($booking->ride_id);
+                $ride->update(['status' => 'active']);
+            }
             
             $message = 'Booking status updated successfully.';
             if ($status == 'confirmed') $message = 'Booking accepted successfully.';
