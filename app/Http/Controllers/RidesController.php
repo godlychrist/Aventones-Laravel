@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RideRequest;
 use App\Models\Ride;
+use App\Models\Movement;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
@@ -48,6 +49,17 @@ class RidesController extends Controller
         }
 
         $rides = $query->orderBy('date')->orderBy('time')->get();
+
+        // Log search if user is authenticated and has applied filters
+        if (Auth::check() && ($selectedOrigin || $selectedDestination || $selectedDate)) {
+            Movement::create([
+                'user_id' => Auth::user()->cedula,
+                'date' => now()->format('Y-m-d'),
+                'leavePlace' => $selectedOrigin ?? '',
+                'destinationPlace' => $selectedDestination ?? '',
+                'resultsNum' => $rides->count(),
+            ]);
+        }
 
         $origins = Ride::where('status', 'active')
             ->select('origin')->distinct()->orderBy('origin')->pluck('origin');
