@@ -21,10 +21,10 @@ class DriverOnly
             return redirect()->route('login')->with('error', 'Debes iniciar sesión para acceder a esta página.');
         }
 
-        // Verificar que el usuario sea conductor o administrador
+        // Verificar que el usuario sea EXCLUSIVAMENTE conductor
         $userType = strtolower(trim(Auth::user()->userType));
         
-        if ($userType !== 'driver' && $userType !== 'admin') {
+        if ($userType !== 'driver') {
             // Redirigir al panel del usuario con mensaje de error
             return redirect()->route('index')->with('error', 'No tienes permisos para acceder a esta página. Solo conductores.');
         }
