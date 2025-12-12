@@ -46,6 +46,20 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
+        // Validar que la cédula no exista
+        if (User::where('cedula', $data['cedula'])->exists()) {
+            return back()
+                ->withInput()
+                ->with('error', 'La cédula ' . $data['cedula'] . ' ya está registrada en el sistema.');
+        }
+
+        // Validar que el correo no exista
+        if (User::where('email', $data['email'])->exists()) {
+            return back()
+                ->withInput()
+                ->with('error', 'El correo electrónico ' . $data['email'] . ' ya está registrado en el sistema.');
+        }
+
         $userType = Auth::check() && Auth::user()->userType === 'admin' ? 'admin' : 'user';
 
         $state = Auth::check() && Auth::user()->userType === 'admin' ? 'active' : 'pending'; 

@@ -33,6 +33,20 @@ class DriverController extends Controller
     {
         $data = $request->validated();
 
+        // Validar que la cédula no exista (buscar en tabla users ya que Driver extiende de User)
+        if (User::where('cedula', $data['cedula'])->exists()) {
+            return back()
+                ->withInput()
+                ->with('error', 'La cédula ' . $data['cedula'] . ' ya está registrada en el sistema.');
+        }
+
+        // Validar que el correo no exista
+        if (User::where('email', $data['email'])->exists()) {
+            return back()
+                ->withInput()
+                ->with('error', 'El correo electrónico ' . $data['email'] . ' ya está registrado en el sistema.');
+        }
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('drivers', 'public');

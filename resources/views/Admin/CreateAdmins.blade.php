@@ -53,6 +53,21 @@
               class="formulario-login text-start w-100 mt-3" style="max-width: 560px;">
             @csrf
 
+            {{-- MENSAJES DE SESIÓN (success/error) --}}
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>¡Éxito!</strong> {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>¡Error!</strong> {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             {{-- Nombre / Apellidos --}}
             <div class="row g-3">
                 <div class="col-12 col-md-6">
