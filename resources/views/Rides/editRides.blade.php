@@ -44,7 +44,7 @@
             <div class="header-box mt-3">
                 <div class="header-content d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
                     <nav class="nav-bar d-flex flex-column flex-sm-row align-items-center gap-3">
-                        <a href="{{ route('home') }}" class="hover-grow fw-bold">Panel</a>
+                        <a href="{{ route('index') }}" class="hover-grow">Panel</a>
                         <a href="{{ route('rides') }}" class="hover-grow active">Rides</a>
                         <a href="{{ route('vehicles') }}" class="hover-grow">Vehículos</a>
                         <a href="{{ route('bookings') }}" class="hover-grow">Reservas</a>
