@@ -52,13 +52,12 @@
                     <a href="{{ route('index') }}">Panel</a>
                     <a href="{{ route('rides') }}">Rides</a>
                     <a href="{{ route('vehicles') }}" class="active">Vehículos</a>
-                    <a href="#">Reservas</a>
+                    <a href="{{ route('bookings') }}">Reservas</a>
                 </nav>
 
                 <div class="d-flex align-items-center gap-3">
-                    <span class="fw-bold">{{ $user->name }}</span>
-                    <a href="{{ route('editUser', $user->cedula) }}" class="btn btn-sm btn-outline-secondary">Perfil</a>
-                    <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-secondary">Cerrar sesión</a>
+                    <a href="{{ route('profile') }}" class="btn btn-sm btn-outline-secondary">Perfil</a>
+                    <a href="{{ route('logout') }}" class="btn btn-sm btn-outline-secondary">Cerrar Sesión</a>
                 </div>
 
             </div>
@@ -155,7 +154,7 @@
             <a href="{{ route('index') }}">Panel</a> |
             <a href="{{ route('rides') }}">Rides</a> |
             <a href="{{ route('vehicles') }}" class="active">Vehículos</a> |
-            <a href="#">Reservas</a>
+            <a href="{{ route('bookings') }}">Reservas</a>
         </nav>
         <p class="footer-copy">© Aventones.com</p>
     </footer>
