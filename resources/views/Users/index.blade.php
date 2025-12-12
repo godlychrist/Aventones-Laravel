@@ -154,6 +154,9 @@
                         <a href="{{ route('showUsers') }}" class="btn btn-primary">
                             <span>👥</span> Ver Usuarios
                         </a>
+                        <a href="{{ route('reports.search') }}" class="btn btn-success">
+                            <span>📊</span> Reporte de Búsquedas
+                        </a>
                         <a href="{{ route('logout') }}" class="btn btn-outline">
                             <span>🚪</span> Cerrar Sesión
                         </a>
