@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\RidesController;
 use App\Http\Controllers\BookingsController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,7 +44,7 @@ Route::get('/index', function () {
 Route::get('register', [UserController::class, 'create'])->name('register');
 Route::post('register', [UserController::class, 'store'])->name('saveUser');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('users', [UserController::class, 'index'])->name('showUsers');
     Route::get('registerAdmin', [UserController::class, 'createAdmin'])->name('registerAdmin');
     Route::get('users/{cedula}/edit', [UserController::class, 'edit'])->name('editUser');
@@ -82,7 +83,7 @@ Route::middleware('auth')->group(function () {
 /**
  * CRUD Vehicles
  */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'driver'])->group(function () {
     Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicles');
     Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicle.create');
     Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
@@ -94,7 +95,7 @@ Route::middleware('auth')->group(function () {
 /**
  * CRUD Rides
  */
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'driver'])->group(function () {
     Route::get('/rides', [RidesController::class, 'index'])->name('rides');
     Route::get('/rides/create', [RidesController::class, 'create'])->name('ride.create');
     Route::post('/rides', [RidesController::class, 'store'])->name('rides.store');
@@ -122,4 +123,12 @@ Route::middleware('auth')->group(function () { // Authenticated users only
     Route::put('/bookings/{id}/status', [BookingsController::class, 'updateStatus'])->name('bookings.status');
 
     Route::delete('/bookings/{id}', [BookingsController::class, 'destroy'])->name('bookings.destroy');
+});
+
+/**
+ * Reports (Admin Only)
+ */
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/reports/search', [ReportsController::class, 'searchReports'])->name('reports.search');
+    Route::get('/reports/search/export', [ReportsController::class, 'exportSearchReports'])->name('reports.search.export');
 });
